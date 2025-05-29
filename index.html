@@ -41,6 +41,9 @@
       border-radius: 6px;
       cursor: pointer;
     }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -70,8 +73,8 @@
     <li>Load Reaction จากคานสู่ เสาอาคาร</li>
   </ol>
 
-  <!-- Section: QR Bot -->
-  <div class="center" style="margin-top: 3rem;">
+  <!-- Section: QR Bot + แนะนำการขอ Ref.Code -->
+  <div style="text-align: center; margin-top: 3rem;">
     <p style="font-weight: bold;">
       📲 หากยังไม่ได้เพิ่ม <strong>ADTLine-Bot</strong> เป็นเพื่อน<br>
       กรุณาสแกน QR ด้านล่างเพื่อเพิ่มบอท
@@ -81,31 +84,45 @@
          alt="QR Code สำหรับเพิ่มบอท"
          width="180" style="margin: 1rem auto; border-radius: 10px; border: 1px solid #ccc; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
 
-    <p style="max-width: 500px; margin: auto; font-size: 1rem;">
+    <p style="max-width: 500px; margin: auto; font-size: 1rem; line-height: 1.6;">
       🟣 หลังจากเพิ่มบอทแล้ว ให้พิมพ์คำว่า <strong style="color:#2563eb;">req_refcode</strong><br>
-      แล้ว <strong>ADTLine-Bot</strong> จะส่ง Ref.Code ให้ในแชท LINE
+      จากนั้น <strong>ADTLine-Bot</strong> จะส่งรหัส <strong>Ref.Code</strong> ให้ท่านในแชท LINE โดยอัตโนมัติ
     </p>
   </div>
 
-  <!-- Section: Ref.Code  -->
+  <!-- ช่องกรอก Ref.Code -->
   <div class="center" style="margin-top: 3rem;">
     <label for="refcode"><strong>🔐 กรอก Ref.Code เพื่อลงทะเบียน:</strong></label><br><br>
     <input type="text" id="refcode" placeholder="พิมพ์ Ref.Code ที่ได้รับ">
     <button onclick="submitRefCode()">ตรวจสอบข้อมูล</button>
   </div>
 
-  <!-- Section: Register Form (Hidden) -->
-  <div id="register-form" class="center" style="margin-top: 2rem; display: none;">
+  <!-- ฟอร์มลงทะเบียนถัดไป (แสดงเมื่อ Ref.Code ผ่าน) -->
+  <div id="register-form" class="center hidden" style="margin-top: 2rem;">
     <h3 style="color:#1e3a8a;">📥 ลงทะเบียนเข้า Workshop</h3>
     <input type="text" id="first_name" placeholder="ชื่อจริง"><br><br>
     <input type="text" id="last_name" placeholder="นามสกุล"><br><br>
     <input type="text" id="phone_number" placeholder="เบอร์โทร"><br><br>
     <input type="text" id="serial_key" placeholder="Serial Key ที่ได้รับ"><br><br>
+
+    <!-- คำถามเกี่ยวกับการมีโปรแกรม ADTSpreadsheet -->
+    <p><strong>คุณมีโปรแกรม ADTSpreadsheet แล้วหรือยัง?</strong></p>
+    <input type="radio" id="has_program_yes" name="has_program" value="yes">
+    <label for="has_program_yes">มีแล้ว</label><br>
+    <input type="radio" id="has_program_no" name="has_program" value="no">
+    <label for="has_program_no">ยังไม่มี</label><br><br>
+
+    <!-- ช่องกรอก License No. (แสดงเมื่อเลือก 'มีแล้ว') -->
+    <div id="license_no_field" class="hidden">
+      <input type="text" id="license_no" placeholder="กรอกหมายเลข License No."><br><br>
+    </div>
+
     <button onclick="submitFinal()">ส่งข้อมูลลงทะเบียน</button>
   </div>
 
-  <!-- Script Section -->
+  <!-- JavaScript: POST API -->
   <script>
+    // ฟังก์ชันตรวจสอบ Ref.Code
     async function submitRefCode() {
       const refCode = document.getElementById('refcode').value.trim();
       if (!refCode) {
@@ -126,11 +143,8 @@
 
         if (response.ok) {
           alert("✅ ตรวจสอบสำเร็จ!");
-
-          // โชว์ฟอร์มกรอกชื่อ-เบอร์-Serial
-          document.getElementById("register-form").style.display = "block";
-
-          // เติม Serial Key ให้อัตโนมัติ
+          document.getElementById("register-form").classList.remove("hidden");
+          // เติม Serial Key อัตโนมัติ
           document.getElementById("serial_key").value = data.serial_key || "";
         } else {
           alert("❌ ไม่สามารถตรวจสอบได้:\n" + data.error);
@@ -141,17 +155,29 @@
       }
     }
 
+    // ฟังก์ชันส่งข้อมูลลงทะเบียน
     async function submitFinal() {
-      const ref_code = document.getElementById('refcode').value.trim();
-      const first_name = document.getElementById('first_name').value.trim();
-      const last_name = document.getElementById('last_name').value.trim();
-      const phone_number = document.getElementById('phone_number').value.trim();
-      const serial_key = document.getElementById('serial_key').value.trim();
+      const refCode = document.getElementById('refcode').value.trim();
+      const firstName = document.getElementById('first_name').value.trim();
+      const lastName = document.getElementById('last_name').value.trim();
+      const phoneNumber = document.getElementById('phone_number').value.trim();
+      const serialKey = document.getElementById('serial_key').value.trim();
+      const hasProgram = document.querySelector('input[name="has_program"]:checked');
+      const licenseNo = document.getElementById('license_no').value.trim();
 
-      if (!first_name || !last_name || !phone_number) {
-        alert("⚠️ กรุณากรอกข้อมูลให้ครบถ้วนก่อนส่งลงทะเบียน");
+      if (!firstName || !lastName || !phoneNumber || !serialKey || !hasProgram) {
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
         return;
       }
+
+      const payload = {
+        ref_code: refCode,
+        serial_key: serialKey,
+        first_name: firstName,
+        last_name: lastName,
+        phone_number: phoneNumber,
+        student_status: hasProgram.value === 'yes' ? licenseNo : 'attendees'
+      };
 
       try {
         const response = await fetch("https://line-bot-adt.onrender.com/adtliveworkshop/submit", {
@@ -159,20 +185,30 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ ref_code, first_name, last_name, phone_number, serial_key })
+          body: JSON.stringify(payload)
         });
 
         const data = await response.json();
 
         if (response.ok) {
-          alert("✅ ลงทะเบียนเรียบร้อยแล้ว! โปรดตรวจสอบแชท LINE ของคุณ");
+          alert("✅ ลงทะเบียนสำเร็จ!");
         } else {
-          alert("❌ ลงทะเบียนไม่สำเร็จ:\n" + data.error);
+          alert("❌ ไม่สามารถลงทะเบียนได้:\n" + data.error);
         }
+
       } catch (err) {
-        alert("⚠️ เกิดข้อผิดพลาดในการส่งข้อมูล:\n" + err.message);
+        alert("⚠️ เกิดข้อผิดพลาดในการเชื่อมต่อ:\n" + err.message);
       }
     }
+
+    // ฟังก์ชันแสดง/ซ่อนช่องกรอก License No.
+    document.getElementById('has_program_yes').addEventListener('change', function() {
+      document.getElementById('license_no_field').classList.remove('hidden');
+    });
+
+    document.getElementById('has_program_no').addEventListener('change', function() {
+      document.getElementById('license_no_field').classList.add('hidden');
+    });
   </script>
 
 </body>
