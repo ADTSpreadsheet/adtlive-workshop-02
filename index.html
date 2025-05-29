@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ADTLive Workshop [02]</title>
   <style>
     body {
@@ -34,7 +34,7 @@
     button {
       padding: 10px 20px;
       font-size: 1rem;
-      margin-left: 10px;
+      margin-top: 10px;
       background-color: #2563eb;
       color: white;
       border: none;
@@ -63,35 +63,23 @@
     <p>📅 เสาร์ ที่ 31 พฤษภาคม พ.ศ. 2568 | 🕖 19:00 - 22:30 น.</p>
   </div>
 
-  <h3 style="color: #1e3a8a;">📚 หัวข้อการบรรยายประจำสัปดาห์</h3>
-  <ol>
-    <li>การคำนวณน้ำหนักที่กระทำกับคาน ค.ส.ล.</li>
-    <li>การวิเคราะห์โครงสร้าง ค.ส.ล.</li>
-    <li>การออกแบบหน้าตัดคาน ค.ส.ล.</li>
-    <li>การจัดทำแปลนโครงสร้างคาน ค.ส.ล.</li>
-    <li>หลักการระบุหมายเลขคาน ค.ส.ล. ในแปลนโครงสร้าง</li>
-    <li>Load Reaction จากคานสู่ เสาอาคาร</li>
-  </ol>
-
   <div style="text-align: center; margin-top: 3rem;">
     <p style="font-weight: bold;">
       📲 หากยังไม่ได้เพิ่ม <strong>ADTLine-Bot</strong> เป็นเพื่อน<br>
       กรุณาสแกน QR ด้านล่างเพื่อเพิ่มบอท
     </p>
-
     <img src="https://wpxpukbvynxawfxcdroj.supabase.co/storage/v1/object/public/adtliveworkshop//ADTLine-Bot.jpg"
          alt="QR Code สำหรับเพิ่มบอท"
          width="180" style="margin: 1rem auto; border-radius: 10px; border: 1px solid #ccc; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
-
-    <p style="max-width: 500px; margin: auto; font-size: 1rem; line-height: 1.6;">
-      🟣 หลังจากเพิ่มบอทแล้ว ให้พิมพ์คำว่า <strong style="color:#2563eb;">req_refcode</strong><br>
-      จากนั้น <strong>ADTLine-Bot</strong> จะส่งรหัส <strong>Ref.Code</strong> ให้ท่านในแชท LINE โดยอัตโนมัติ
+    <p style="max-width: 500px; margin: auto; font-size: 1rem;">
+      🟣 เพิ่มเพื่อนแล้ว พิมพ์ <strong style="color:#2563eb;">req_refcode</strong><br>
+      เพื่อรับ Ref.Code จากบอททาง LINE โดยอัตโนมัติ
     </p>
   </div>
 
-  <!-- ช่องกรอก Ref.Code -->
+  <!-- Ref.Code -->
   <div class="center" style="margin-top: 3rem;">
-    <label for="refcode"><strong>🔐 กรอก Ref.Code เพื่อลงทะเบียน:</strong></label><br><br>
+    <label><strong>🔐 กรอก Ref.Code เพื่อลงทะเบียน:</strong></label><br><br>
     <input type="text" id="refcode" placeholder="พิมพ์ Ref.Code ที่ได้รับ">
     <button onclick="submitRefCode()">ตรวจสอบข้อมูล</button>
   </div>
@@ -114,12 +102,11 @@
       <input type="text" id="license_no" placeholder="กรอกหมายเลข License No. เช่น ADT015"><br><br>
     </div>
 
-    <!-- ปุ่มยืนยันที่ถูกซ่อนไว้ก่อน -->
     <button id="confirmBtn" onclick="submitFinal()" class="hidden">ส่งข้อมูลลงทะเบียน</button>
   </div>
 
+  <!-- SCRIPT ZONE -->
   <script>
-    // ฟังก์ชันตรวจสอบ Ref.Code
     async function submitRefCode() {
       const refCode = document.getElementById('refcode').value.trim();
       if (!refCode) {
@@ -149,7 +136,6 @@
       }
     }
 
-    // ฟังก์ชันส่งข้อมูลลงทะเบียน
     async function submitFinal() {
       const refCode = document.getElementById('refcode').value.trim();
       const firstName = document.getElementById('first_name').value.trim();
@@ -183,31 +169,29 @@
         const data = await response.json();
 
         if (response.ok) {
-          alert("✅ ลงทะเบียนสำเร็จ!");
+          window.location.href = "/thank-you.html";
+          return;
         } else {
-          alert("❌ ไม่สามารถลงทะเบียนได้:\n" + (data.error || JSON.stringify(data)));
+          alert("❌ ไม่สามารถลงทะเบียนได้:\n" + data.error);
         }
 
       } catch (err) {
-        alert("⚠️ เกิดข้อผิดพลาด:\n" + err.message);
+        alert("⚠️ เกิดข้อผิดพลาดในการเชื่อมต่อ:\n" + err.message);
       }
     }
 
-    // ซ่อน/แสดงช่องกรอก License No.
-    document.getElementById('has_program_yes').addEventListener('change', function () {
+    document.getElementById('has_program_yes').addEventListener('change', () => {
       document.getElementById('license_no_field').classList.remove('hidden');
     });
 
-    document.getElementById('has_program_no').addEventListener('change', function () {
+    document.getElementById('has_program_no').addEventListener('change', () => {
       document.getElementById('license_no_field').classList.add('hidden');
     });
 
-    // ซ่อนปุ่มยืนยันจนกว่าจะเลือก radio
-    const radioButtons = document.querySelectorAll('input[name="has_program"]');
+    const radios = document.querySelectorAll('input[name="has_program"]');
     const confirmBtn = document.getElementById('confirmBtn');
-
-    radioButtons.forEach((btn) => {
-      btn.addEventListener('change', () => {
+    radios.forEach((r) => {
+      r.addEventListener('change', () => {
         confirmBtn.classList.remove('hidden');
       });
     });
