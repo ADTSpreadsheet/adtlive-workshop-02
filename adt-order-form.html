@@ -129,21 +129,31 @@
     </div>
   </div>
 
-  <script>
-    function showQR() {
-      document.getElementById("qr_section").classList.remove("hidden");
-      document.getElementById("slip_section").classList.remove("hidden");
+<script>
+  function showQR() {
+    document.getElementById("qr_section").classList.remove("hidden");
+    document.getElementById("slip_section").classList.remove("hidden");
+  }
+
+  function showFilePath(event) {
+    const file = event.target.files[0];
+    if (file) {
+      document.getElementById("file_path_display").innerText = "ไฟล์ที่แนบ: " + file.name;
+    }
+  }
+
+  async function submitOrder() {
+    const slipFile = document.getElementById("slip_file").files[0];
+    if (!slipFile) {
+      alert("กรุณาแนบสลิปก่อนกดยืนยัน");
+      return;
     }
 
-    function showFilePath(event) {
-      const file = event.target.files[0];
-      if (file) {
-        document.getElementById("file_path_display").innerText = "ไฟล์ที่แนบ: " + file.name;
-      }
-    }
+    const reader = new FileReader();
+    reader.onload = async function () {
+      const base64Image = reader.result;
 
-    function submitOrder() {
-      const data = {
+      const payload = {
         ref_code: document.getElementById("ref_code").value,
         first_name: document.getElementById("first_name").value,
         last_name: document.getElementById("last_name").value,
@@ -152,15 +162,34 @@
         phone_number: document.getElementById("phone_number").value,
         email: document.getElementById("email").value,
         postal_code: document.getElementById("postal_code").value,
-        slip_file_name: document.getElementById("slip_file").files[0]?.name || null
+        file_name: slipFile.name,
+        file_content: base64Image
       };
 
-      alert("ข้อมูลที่กรอก:\n" + JSON.stringify(data, null, 2));
+      try {
+        const res = await fetch("https://line-bot-adt.onrender.com/adt-order/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
 
-      // TODO: ส่ง API จริงตรงนี้
-      // window.location.href = "ADTthank-you.html";
-    }
-  </script>
+        if (res.status === 200) {
+          window.location.href = "ADTthank-you.html";
+        } else {
+          alert("เกิดข้อผิดพลาดขณะส่งข้อมูล กรุณาลองใหม่อีกครั้ง");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ");
+      }
+    };
+
+    reader.readAsDataURL(slipFile);
+  }
+</script>
+
 
 </body>
 </html>
