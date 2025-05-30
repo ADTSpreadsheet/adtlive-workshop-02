@@ -3,137 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PDPA Consent - ADTSpreadsheet</title>
+  <title>ยินยอม PDPA - ADTSpreadsheet</title>
   <style>
     body {
       font-family: Tahoma, sans-serif;
-      background-color: #f1f1f1;
+      background-color: #f4f4f4;
       margin: 0;
-      padding: 20px;
-      color: #222;
-    }
-    .container {
-      max-width: 750px;
-      margin: auto;
-      background: #fff;
-      border: 1px solid #ccc;
       padding: 30px;
-      border-radius: 6px;
     }
-    .status-bar {
-      background-color: #e6f2ff;
-      padding: 10px;
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .step-bar {
+      background-color: #e0f3ff;
+      padding: 12px;
       font-weight: bold;
-      border: 1px solid #aad;
-      border-radius: 4px;
+      color: #0b5394;
+      border: 1px solid #b3daf1;
+      border-radius: 6px;
       margin-bottom: 20px;
       text-align: center;
     }
-    .title-box {
-      background-color: #008000;
+
+    .pdpa-header {
+      background-color: green;
       color: white;
-      text-align: center;
-      padding: 12px;
+      padding: 10px;
+      font-weight: bold;
       border-radius: 4px;
-      margin-bottom: 10px;
-      font-size: 18px;
+      text-align: center;
+      font-size: 16px;
     }
-    .subtitle {
+
+    .pdpa-subtitle {
       text-align: center;
       font-weight: bold;
-      color: #008000;
-      margin-bottom: 15px;
-      font-size: 16px;
+      margin-top: 10px;
+      color: #009900;
     }
-    .scroll-box {
-      height: 400px;
-      overflow-y: scroll;
-      border: 1px solid #ccc;
-      padding: 15px;
-      background-color: #fafafa;
-      font-size: 14px;
-      line-height: 1.6;
-      white-space: pre-wrap;
-    }
-    .checkbox {
+
+    .pdpa-box {
       margin-top: 20px;
+      height: 300px;
+      overflow-y: scroll;
+      padding: 20px;
+      background-color: #f7f7f7;
       font-size: 14px;
-    }
-    .button {
-      margin-top: 25px;
-      background-color: #fffacc;
-      padding: 12px 30px;
-      font-size: 16px;
-      border: 2px solid #999;
-      cursor: pointer;
+      line-height: 1.7;
       border-radius: 6px;
     }
-    .button:hover {
-      background-color: #f1f1a1;
+
+    .agree-row {
+      margin-top: 20px;
     }
-    .text-center {
+
+    .agree-row input {
+      margin-right: 8px;
+    }
+
+    .next-button {
+      background-color: gold;
+      border: none;
+      padding: 12px 24px;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .center {
       text-align: center;
     }
   </style>
 </head>
 <body>
+
   <div class="container">
+    <div class="step-bar">ขั้นตอนที่ 1 / 3 : ตรวจสอบเงื่อนไขข้อตกลงก่อนการสั่งซื้อโปรแกรม</div>
 
-    <!-- สถานะขั้นตอน -->
-    <div class="status-bar">
-      ขั้นตอนที่ 1 / 3 : ตรวจสอบเงื่อนไขข้อตกลงก่อนการสั่งซื้อโปรแกรม
+    <div class="pdpa-header">เงื่อนไข/ข้อตกลงสำหรับเข้าใช้งานโปรแกรม</div>
+    <div class="pdpa-subtitle">ADTSpreadsheet</div>
+
+    <div class="pdpa-box">
+      <!-- นำเนื้อหา PDPA ทั้งชุดของพี่เก่งวางไว้ตรงนี้ได้เลย -->
+      <p>ในเงื่อนไข/ข้อตกลงต่อไปนี้ ให้ผู้เข้าใช้งานโปรแกรมทำความเข้าใจอย่างละเอียดและยินยอมปฏิบัติตามทุกข้อ...</p>
+      <p><strong>ข้อที่ 1:</strong> โปรแกรมนี้พัฒนาบนพื้นฐาน Excel และใช้เพื่อช่วยออกแบบทางวิศวกรรม...</p>
+      <p><strong>ข้อที่ 2:</strong> ผู้ใช้งานต้องกรอกข้อมูลจริง หากปลอมแปลงจะถูกระงับสิทธิ์ทันที...</p>
+      <p><strong>ข้อที่ 3:</strong> ผู้ใช้งานเป็นผู้รับผิดชอบต่อเอกสารทุกฉบับที่สร้างจากโปรแกรม...</p>
+      <p><strong>ข้อที่ 4:</strong> ห้ามแก้ไข/คัดลอก/วิจารณ์ ทำให้เกิดความเสียหายต่อภาพลักษณ์โปรแกรม...</p>
+      <p><strong>ข้อที่ 5 :</strong> หากพบการโจมตีหรือพฤติกรรมทุจริต ผู้พัฒนาขอสงวนสิทธิ์ในการยกเลิกสิทธิ์การใช้งานทันที โดยไม่จำเป็นต้องแจ้งให้ทราบล่วงหน้า</p>
+      <p><strong>ข้อที่ 6 :</strong> การทดลองใช้งาน 7 วันนับจากวันลงทะเบียน โดย 1 User ID ใช้งานได้เพียง 1 เครื่อง หากพบการใช้งานซ้ำ จะถูกระงับทันที</p>
+      <p><strong>ข้อที่ 7 :</strong> ผู้ใช้งานยินยอมให้จัดเก็บข้อมูลส่วนบุคคลเพื่อระบุตัวตน ได้แก่ ชื่อ–นามสกุล, เบอร์โทรศัพท์, เลขบัตรประชาชน, LINE ID, IP, Machine ID เพื่อใช้ควบคุมสิทธิ์การใช้งานเท่านั้น</p>
+      <p><strong>ข้อที่ 8 :</strong> การบริการหลังการขายครอบคลุมเฉพาะปัญหาที่เกี่ยวกับโปรแกรมเท่านั้น ปัญหาจากสภาพแวดล้อมของผู้ใช้งานอาจมีบริการเพิ่มเติมตามความเหมาะสม</p>
+
     </div>
 
-    <!-- หัวข้อ -->
-    <div class="title-box">เงื่อนไข/ข้อตกลงสำหรับเข้าใช้งานโปรแกรม</div>
-    <div class="subtitle">ADTSpreadsheet</div>
-
-    <!-- กล่องเลื่อน -->
-    <div class="scroll-box">
-ในเงื่อนไข/ข้อตกลงต่อไปนี้ ให้ผู้เข้าใช้งานโปรแกรมทำความเข้าใจอย่างละเอียดและผู้เข้าใช้งานโปรแกรม ADTSpreadsheet ต้องปฏิบัติและยินยอมตามข้อตกลงในเอกสารฉบับนี้ทุกประการ ดังนี้:
-
-ข้อที่ 1 : โปรแกรม ADTSpreadsheet เป็นซอฟต์แวร์ที่พัฒนาบน Microsoft Excel โดยใช้ความรู้ด้านวิศวกรรมและ Visual Basic for Applications เพื่อช่วยจัดทำเอกสารรายการคำนวณทางวิศวกรรม โดยอยู่ภายใต้ดุลยพินิจของผู้ใช้
-
-ข้อที่ 2 : ผู้ใช้งานจะต้องกรอกข้อมูลจริงในการลงทะเบียน หากตรวจพบว่าข้อมูลเป็นเท็จ ผู้พัฒนาขอสงวนสิทธิ์ในการบล็อกการใช้งานโดยไม่ต้องแจ้งล่วงหน้า
-
-ข้อที่ 3 : ผู้ใช้งานต้องรับผิดชอบต่อเอกสารที่สร้างจากโปรแกรม หากเกิดปัญหาใด ๆ ที่ไม่เกี่ยวข้องกับโปรแกรม ถือเป็นความรับผิดชอบของผู้ใช้งานแต่เพียงผู้เดียว
-
-ข้อที่ 4 : ห้ามดัดแปลง แก้ไข คัดลอก หรือเปลี่ยนแปลงโครงสร้างโปรแกรมไม่ว่ากรณีใด ๆ
-
-ข้อที่ 5 : หากพบการโจมตีหรือพฤติกรรมทุจริต ผู้พัฒนาขอสงวนสิทธิ์ในการยกเลิกสิทธิ์การใช้งานทันที
-
-ข้อที่ 6 : การทดลองใช้งาน 7 วันนับจากวันลงทะเบียน โดย 1 User ID ใช้งานได้เพียง 1 เครื่อง หากพบการใช้งานซ้ำจะถูกระงับทันที
-
-ข้อที่ 7 : ผู้ใช้งานยินยอมให้จัดเก็บข้อมูลส่วนบุคคลเพื่อระบุตัวตน ได้แก่ ชื่อ-นามสกุล, เบอร์โทร, เลขบัตรประชาชน, LINE ID, IP, Machine ID เพื่อใช้ควบคุมสิทธิ์การใช้งานเท่านั้น
-
-ข้อที่ 8 : การบริการหลังการขายครอบคลุมเฉพาะปัญหาที่เกี่ยวกับตัวโปรแกรมเท่านั้น ปัญหาจากสภาพแวดล้อมของผู้ใช้อาจมีค่าบริการเพิ่มเติม
+    <div class="agree-row">
+      <label><input type="checkbox" id="agreeCheck" /> ข้าพเจ้าได้อ่านและยอมรับข้อตกลงข้างต้นทั้งหมดแล้ว</label>
     </div>
 
-    <!-- Checkbox -->
-    <div class="checkbox">
-      <input type="checkbox" id="agreeCheck" onchange="toggleButton()">
-      <label for="agreeCheck">
-        ข้าพเจ้าได้อ่านและยอมรับข้อตกลงข้างต้นทั้งหมดแล้ว
-      </label>
+    <div class="center">
+      <button class="next-button" onclick="goNext()" id="nextBtn" disabled>ดำเนินการต่อ</button>
     </div>
-
-    <!-- ปุ่ม -->
-    <div class="text-center">
-      <button id="continueBtn" class="button" onclick="goNext()" style="display: none;">ดำเนินการต่อ</button>
-    </div>
-
   </div>
 
   <script>
-    function toggleButton() {
-      const checkbox = document.getElementById('agreeCheck');
-      const button = document.getElementById('continueBtn');
-      button.style.display = checkbox.checked ? 'inline-block' : 'none';
-    }
+    const check = document.getElementById('agreeCheck');
+    const btn = document.getElementById('nextBtn');
+    check.addEventListener('change', () => {
+      btn.disabled = !check.checked;
+    });
 
     function goNext() {
       window.location.href = "adt-order-form.html";
     }
   </script>
+
 </body>
 </html>
