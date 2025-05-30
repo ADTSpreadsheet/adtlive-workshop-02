@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PDPA Consent - ADTSpreadsheet</title>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background-color: #f1f1f1;
+      margin: 0;
+      padding: 20px;
+      color: #222;
+    }
+    .container {
+      max-width: 750px;
+      margin: auto;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 30px;
+      border-radius: 6px;
+    }
+    .status-bar {
+      background-color: #e6f2ff;
+      padding: 10px;
+      font-weight: bold;
+      border: 1px solid #aad;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .title-box {
+      background-color: #008000;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .subtitle {
+      text-align: center;
+      font-weight: bold;
+      color: #008000;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    .scroll-box {
+      height: 400px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 15px;
+      background-color: #fafafa;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    .checkbox {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .button {
+      margin-top: 25px;
+      background-color: #fffacc;
+      padding: 12px 30px;
+      font-size: 16px;
+      border: 2px solid #999;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .button:hover {
+      background-color: #f1f1a1;
+    }
+    .text-center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- สถานะขั้นตอน -->
+    <div class="status-bar">
+      ขั้นตอนที่ 2 จาก 4: ยินยอม PDPA เพื่อเข้าใช้งานโปรแกรม
+    </div>
+
+    <!-- หัวข้อ -->
+    <div class="title-box">เงื่อนไข/ข้อตกลงสำหรับเข้าใช้งานโปรแกรม</div>
+    <div class="subtitle">ADTSpreadsheet</div>
+
+    <!-- กล่องเลื่อน -->
+    <div class="scroll-box">
+ในเงื่อนไข/ข้อตกลงต่อไปนี้ ให้ผู้เข้าใช้งานโปรแกรมทำความเข้าใจอย่างละเอียดและผู้เข้าใช้งานโปรแกรม ADTSpreadsheet ต้องปฏิบัติและยินยอมตามข้อตกลงในเอกสารฉบับนี้ทุกประการ ดังนี้:
+
+ข้อที่ 1 : โปรแกรม ADTSpreadsheet เป็นซอฟต์แวร์ที่พัฒนาบน Microsoft Excel โดยใช้ความรู้ด้านวิศวกรรมและ Visual Basic for Applications เพื่อช่วยจัดทำเอกสารรายการคำนวณทางวิศวกรรม โดยอยู่ภายใต้ดุลยพินิจของผู้ใช้
+
+ข้อที่ 2 : ผู้ใช้งานจะต้องกรอกข้อมูลจริงในการลงทะเบียน หากตรวจพบว่าข้อมูลเป็นเท็จ ผู้พัฒนาขอสงวนสิทธิ์ในการบล็อกการใช้งานโดยไม่ต้องแจ้งล่วงหน้า
+
+ข้อที่ 3 : ผู้ใช้งานต้องรับผิดชอบต่อเอกสารที่สร้างจากโปรแกรม หากเกิดปัญหาใด ๆ ที่ไม่เกี่ยวข้องกับโปรแกรม ถือเป็นความรับผิดชอบของผู้ใช้งานแต่เพียงผู้เดียว
+
+ข้อที่ 4 : ห้ามดัดแปลง แก้ไข คัดลอก หรือเปลี่ยนแปลงโครงสร้างโปรแกรมไม่ว่ากรณีใด ๆ
+
+ข้อที่ 5 : หากพบการโจมตีหรือพฤติกรรมทุจริต ผู้พัฒนาขอสงวนสิทธิ์ในการยกเลิกสิทธิ์การใช้งานทันที
+
+ข้อที่ 6 : การทดลองใช้งาน 7 วันนับจากวันลงทะเบียน โดย 1 User ID ใช้งานได้เพียง 1 เครื่อง หากพบการใช้งานซ้ำจะถูกระงับทันที
+
+ข้อที่ 7 : ผู้ใช้งานยินยอมให้จัดเก็บข้อมูลส่วนบุคคลเพื่อระบุตัวตน ได้แก่ ชื่อ-นามสกุล, เบอร์โทร, เลขบัตรประชาชน, LINE ID, IP, Machine ID เพื่อใช้ควบคุมสิทธิ์การใช้งานเท่านั้น
+
+ข้อที่ 8 : การบริการหลังการขายครอบคลุมเฉพาะปัญหาที่เกี่ยวกับตัวโปรแกรมเท่านั้น ปัญหาจากสภาพแวดล้อมของผู้ใช้อาจมีค่าบริการเพิ่มเติม
+    </div>
+
+    <!-- Checkbox -->
+    <div class="checkbox">
+      <input type="checkbox" id="agreeCheck" onchange="toggleButton()">
+      <label for="agreeCheck">
+        ข้าพเจ้าได้อ่านและยอมรับข้อตกลงข้างต้นทั้งหมดแล้ว
+      </label>
+    </div>
+
+    <!-- ปุ่ม -->
+    <div class="text-center">
+      <button id="continueBtn" class="button" onclick="goNext()" style="display: none;">ดำเนินการต่อ</button>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleButton() {
+      const checkbox = document.getElementById('agreeCheck');
+      const button = document.getElementById('continueBtn');
+      button.style.display = checkbox.checked ? 'inline-block' : 'none';
+    }
+
+    function goNext() {
+      window.location.href = "adt-order-form.html";
+    }
+  </script>
+</body>
+</html>
