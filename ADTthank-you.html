@@ -26,7 +26,17 @@
       color: #155724;
       border: 1px solid #c3e6cb;
       border-radius: 5px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+    }
+    img.checkmark {
+      width: 60px;
+      margin-bottom: 15px;
+    }
+    .green-text {
+      color: #2e8b57;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 20px;
     }
     .message {
       font-size: 16px;
@@ -34,9 +44,10 @@
       margin-bottom: 30px;
     }
     img.logo {
-      width: 160px;
+      max-width: 180px;
+      width: 100%;
       margin-top: 20px;
-      opacity: 0.9;
+      opacity: 0.95;
     }
   </style>
 </head>
@@ -44,14 +55,21 @@
 
   <div class="container">
 
-    <!-- แถบสถานะ -->
+    <!-- สถานะ -->
     <div class="status-bar">
       ขั้นตอนที่ 3 / 3 : ตรวจสอบสถานะการสั่งซื้อจาก ADTLine-Bot
     </div>
 
-    <!-- ข้อความแจ้งสถานะ -->
+    <!-- รูปเครื่องหมายถูก -->
+    <img src="https://wpxpukbvynxawfxcdroj.supabase.co/storage/v1/object/public/chat-media//True%20Gold.jpg">
+
+    <!-- ข้อความสีเขียว -->
+    <div class="green-text">
+      ข้อมูลการสั่งซื้อของท่านถูกส่งไปยังฝ่ายขายเป็นที่เรียบร้อยแล้ว
+    </div>
+
+    <!-- ข้อความขอบคุณ -->
     <div class="message">
-      ข้อมูลการสั่งซื้อของท่านถูกส่งไปยังฝ่ายขายเป็นที่เรียบร้อยแล้ว<br><br>
       ขอบคุณสำหรับการสั่งซื้อโปรแกรม <strong>ADTSpreadsheet (1.0 FULL VERSION)</strong><br><br>
       ฝ่ายขายจะดำเนินการตรวจสอบข้อมูลการสั่งซื้อของท่าน<br>
       และแจ้งสถานะการสั่งซื้อพร้อมหมายเลขลิขสิทธิ์โปรแกรมของท่าน<br>
