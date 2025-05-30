@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>สั่งซื้อ ADTSpreadsheet</title>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 30px;
+    }
+    .status-bar {
+      background-color: #fff3cd;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+      border: 1px solid #ffeeba;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .hidden {
+      display: none;
+    }
+    .qr-section, .slip-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .qr-section img {
+      max-width: 250px;
+      margin-top: 10px;
+    }
+    .slip-section input[type="file"] {
+      margin-top: 10px;
+    }
+    .path-box {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- สถานะ -->
+    <div class="status-bar">
+      ขั้นตอนที่ 2 / 3 : กรอกข้อมูลผู้สั่งซื้อ + แนบสลิปโอนเงิน
+    </div>
+
+    <!-- ฟอร์มกรอก -->
+    <label>Ref Code</label>
+    <input type="text" id="ref_code">
+
+    <label>ชื่อ (First Name)</label>
+    <input type="text" id="first_name">
+
+    <label>นามสกุล (Last Name)</label>
+    <input type="text" id="last_name">
+
+    <label>เลขบัตรประชาชน (National ID)</label>
+    <input type="text" id="national_id">
+
+    <label>ที่อยู่ (Address)</label>
+    <input type="text" id="address">
+
+    <label>เบอร์โทรศัพท์ (Phone Number)</label>
+    <input type="text" id="phone_number">
+
+    <!-- ปุ่มแสดง QR -->
+    <div class="text-center">
+      <button class="btn" onclick="showQR()">แสดง QR สำหรับชำระเงิน</button>
+    </div>
+
+    <!-- QR Code -->
+    <div id="qr_section" class="qr-section hidden">
+      <p>กรุณาสแกน QR นี้เพื่อชำระเงิน</p>
+      <img src="https://wpxpukbvynxawfxcdroj.supabase.co/storage/v1/object/public/chat-media//QR-ADT5500.jpg">
+    </div>
+
+    <!-- แนบสลิป -->
+    <div id="slip_section" class="slip-section hidden">
+      <label>แนบสลิปการโอนเงิน</label>
+      <input type="file" id="slip_file" onchange="showFilePath(event)">
+      <div class="path-box" id="file_path_display"></div>
+    </div>
+
+    <!-- ปุ่ม Submit -->
+    <div class="text-center">
+      <button class="btn" onclick="submitOrder()">ยืนยันการสั่งซื้อ</button>
+    </div>
+
+  </div>
+
+  <script>
+    function showQR() {
+      document.getElementById("qr_section").classList.remove("hidden");
+      document.getElementById("slip_section").classList.remove("hidden");
+    }
+
+    function showFilePath(event) {
+      const file = event.target.files[0];
+      if (file) {
+        document.getElementById("file_path_display").innerText = "ไฟล์ที่แนบ: " + file.name;
+      }
+    }
+
+    function submitOrder() {
+      const data = {
+        ref_code: document.getElementById("ref_code").value,
+        first_name: document.getElementById("first_name").value,
+        last_name: document.getElementById("last_name").value,
+        national_id: document.getElementById("national_id").value,
+        address: document.getElementById("address").value,
+        phone_number: document.getElementById("phone_number").value,
+      };
+
+      alert("ระบบพร้อมส่งข้อมูลจริงตอนเชื่อม API\n\nข้อมูลที่กรอก:\n" + JSON.stringify(data, null, 2));
+      // เมื่อพร้อมเชื่อม API จริงให้ใช้ fetch() หรือ XMLHttpRequest ตรงนี้
+      // หลังส่งสำเร็จ:
+      window.location.href = "thank-you.html";
+    }
+  </script>
+
+</body>
+</html>
