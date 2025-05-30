@@ -32,7 +32,7 @@
       margin-top: 15px;
       font-weight: bold;
     }
-    input[type="text"] {
+    input[type="text"], input[type="email"] {
       width: 100%;
       padding: 8px;
       margin-top: 4px;
@@ -76,8 +76,6 @@
 <body>
 
   <div class="container">
-
-    <!-- สถานะ -->
     <div class="status-bar">
       ขั้นตอนที่ 2 / 3 : กรอกข้อมูลผู้สั่งซื้อ + แนบสลิปโอนเงิน
     </div>
@@ -101,6 +99,12 @@
     <label>เบอร์โทรศัพท์ (Phone Number)</label>
     <input type="text" id="phone_number">
 
+    <label>Email</label>
+    <input type="email" id="email">
+
+    <label>รหัสไปรษณีย์ (Postal Code)</label>
+    <input type="text" id="postal_code">
+
     <!-- ปุ่มแสดง QR -->
     <div class="text-center">
       <button class="btn" onclick="showQR()">แสดง QR สำหรับชำระเงิน</button>
@@ -109,7 +113,7 @@
     <!-- QR Code -->
     <div id="qr_section" class="qr-section hidden">
       <p>กรุณาสแกน QR นี้เพื่อชำระเงิน</p>
-      <img src="https://wpxpukbvynxawfxcdroj.supabase.co/storage/v1/object/public/chat-media//QR-ADT5500.jpg">
+      <img src="https://wpxpukbvynxawfxcdroj.supabase.co/storage/v1/object/public/chat-media//QR-ADT5500.jpg" alt="QR Code">
     </div>
 
     <!-- แนบสลิป -->
@@ -123,7 +127,6 @@
     <div class="text-center">
       <button class="btn" onclick="submitOrder()">ยืนยันการสั่งซื้อ</button>
     </div>
-
   </div>
 
   <script>
@@ -147,12 +150,15 @@
         national_id: document.getElementById("national_id").value,
         address: document.getElementById("address").value,
         phone_number: document.getElementById("phone_number").value,
+        email: document.getElementById("email").value,
+        postal_code: document.getElementById("postal_code").value,
+        slip_file_name: document.getElementById("slip_file").files[0]?.name || null
       };
 
-      alert("ระบบพร้อมส่งข้อมูลจริงตอนเชื่อม API\n\nข้อมูลที่กรอก:\n" + JSON.stringify(data, null, 2));
-      // เมื่อพร้อมเชื่อม API จริงให้ใช้ fetch() หรือ XMLHttpRequest ตรงนี้
-      // หลังส่งสำเร็จ:
-      window.location.href = "thank-you.html";
+      alert("ข้อมูลที่กรอก:\n" + JSON.stringify(data, null, 2));
+
+      // TODO: ส่ง API จริงตรงนี้
+      // window.location.href = "ADTthank-you.html";
     }
   </script>
 
