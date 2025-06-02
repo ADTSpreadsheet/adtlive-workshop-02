@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starter Plan Register - ADTSpreadsheet</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-blue-50 font-sans text-gray-800">
+
+  <div class="max-w-xl mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
+    <h1 class="text-2xl font-bold text-center mb-4">Stater Plan Register</h1>
+    
+    <form id="starterForm">
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">Ref. Code</label>
+        <input type="text" id="ref_code" class="w-full border px-3 py-2 rounded" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">ชื่อ (First Name)</label>
+        <input type="text" id="first_name" class="w-full border px-3 py-2 rounded" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">นามสกุล (Last Name)</label>
+        <input type="text" id="last_name" class="w-full border px-3 py-2 rounded" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">เลขบัตรประชาชน 13 หลัก (National ID)</label>
+        <input type="text" id="national_id" maxlength="13" class="w-full border px-3 py-2 rounded" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">เบอร์โทรศัพท์ (Phone Number)</label>
+        <input type="tel" id="phone_number" maxlength="10" class="w-full border px-3 py-2 rounded" required>
+      </div>
+
+      <div class="mb-6">
+        <label class="block font-semibold mb-1">จำนวนวันที่ต้องการใช้งาน (Duration)</label>
+        <select id="duration" class="w-full border px-3 py-2 rounded" required>
+          <option value="">-- กรุณาเลือกจำนวนวัน --</option>
+          <!-- JavaScript จะเติมให้ -->
+        </select>
+      </div>
+
+      <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+        เริ่มใช้งาน Starter Plan
+      </button>
+    </form>
+  </div>
+
+  <script>
+    // เติมรายการ 1–15 day ลงใน Combobox
+    const durationSelect = document.getElementById('duration');
+    for (let i = 1; i <= 15; i++) {
+      const option = document.createElement('option');
+      option.value = `${i}`;
+      option.textContent = `${i} day`;
+      durationSelect.appendChild(option);
+    }
+
+    // จัดการ Submit (ตัวอย่าง)
+    document.getElementById('starterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('ระบบจะส่งข้อมูลไปยัง API ต่อไปครับ (ยังไม่เชื่อม API จริง)');
+    });
+  </script>
+</body>
+</html>
