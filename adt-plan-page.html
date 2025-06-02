@@ -3,26 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ADTSpreadsheet Plan</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>ADTSpricing Plans</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-white text-gray-900 font-sans">
+<body class="bg-white text-gray-800 font-sans">
 
-  <div class="max-w-6xl mx-auto py-10 px-4">
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <h1 class="text-4xl font-extrabold text-center mb-2 text-black">ADTSpreadsheet</h1>
+    <p class="text-center text-sm text-gray-700 mb-1">
+      โปรแกรมออกแบบโครงสร้างบ้านพักอาศัย อาคารทั่วไป โดยวิธีหน่วยแรงใช้งาน / Working Stress Design : WSD
+    </p>
+    <p class="text-center text-sm text-gray-700 mb-10">
+      โดยใช้มาตรฐานการออกแบบจากวิศวกรรมสถานแห่งประเทศไทย (ISBN 974-858-145-4 E.I.T. Standard 1007-34)
+    </p>
 
-    <!-- Header -->
-    <div class="text-center mb-10">
-      <h1 class="text-4xl font-bold text-black">ADTSpreadsheet</h1>
-      <p class="text-blue-600 font-semibold">(1.0 VERSION)</p>
-      <p class="mt-2 text-sm leading-relaxed">
-        โปรแกรมออกแบบโครงสร้างบ้านพักอาศัย อาคารทั่วไป โดยวิธีหน่วยแรงใช้งาน / Working Stress Design : WSD <br />
-        โดยใช้มาตรฐานการออกแบบจากวิศวกรรมสถานแห่งประเทศไทย (ISBN 974-858-145-4 E.I.T. Standard 1007-34)
-      </p>
-    </div>
-
-    <!-- Pricing Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
       <!-- Starter Plan -->
       <div class="border border-black rounded-xl p-8 shadow-md">
         <h2 class="text-2xl font-bold text-center text-black mb-4">Starter Plan</h2>
@@ -31,15 +26,21 @@
         </div>
         <ul class="space-y-3 text-sm">
           <li class="text-green-600">✔ จำกัดเวลาการใช้งานตาม Duration</li>
-          <li class="text-red-500">✖ ไม่จำกัดการอัปเดตโปรแกรม</li>
+          <li class="text-red-600">✘ ไม่จำกัดการอัพเดตโปรแกรม</li>
           <li class="text-green-600">✔ ห้องเรียนออนไลน์ฟรี</li>
-          <li class="text-red-500">✖ วิดีโอการสอนใช้โปรแกรมย้อนหลังฟรี</li>
+          <li class="text-red-600">✘ วิดีโอการสอนใช้โปรแกรมย้อนหลังฟรี</li>
           <li class="text-green-600">✔ ระบบ ADTLine-Bot</li>
-          <li class="text-red-500">✖ Facebook Group</li>
-          <li class="text-red-500">✖ คู่มือการใช้งานโปรแกรม</li>
-          <li class="text-red-500">✖ เอกสารตัวอย่างรายการคำนวณและอื่น ๆ</li>
-          <li class="text-red-500">✖ การผลิตอินโฟกราฟรายการคำนวณแบบไม่ติดลายน้ำ</li>
+          <li class="text-red-600">✘ Facebook Group</li>
+          <li class="text-red-600">✘ คู่มือการใช้งานโปรแกรม</li>
+          <li class="text-red-600">✘ เอกสารตัวอย่างรายการคำนวณและอื่น ๆ</li>
+          <li class="text-red-600">✘ การผลิตอินโฟกราฟรายการคำนวณแบบไม่ติดลายน้ำ</li>
         </ul>
+        <div class="text-center mt-6">
+          <a href="https://adtlive-workshop-02.onrender.com/adt-order-daily.html"
+             class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full">
+            ทดลองใช้แบบรายวัน
+          </a>
+        </div>
       </div>
 
       <!-- Professional Plan -->
@@ -50,7 +51,7 @@
         </div>
         <ul class="space-y-3 text-sm">
           <li class="text-green-600">✔ ไม่จำกัดการใช้งาน</li>
-          <li class="text-green-600">✔ ไม่จำกัดการอัปเดตโปรแกรม</li>
+          <li class="text-green-600">✔ ไม่จำกัดการอัพเดตโปรแกรม</li>
           <li class="text-green-600">✔ ห้องเรียนออนไลน์ฟรี</li>
           <li class="text-green-600">✔ วิดีโอการสอนใช้โปรแกรมย้อนหลังฟรี</li>
           <li class="text-green-600">✔ ระบบ ADTLine-Bot</li>
@@ -59,10 +60,14 @@
           <li class="text-green-600">✔ เอกสารตัวอย่างรายการคำนวณและอื่น ๆ</li>
           <li class="text-green-600">✔ การผลิตอินโฟกราฟรายการคำนวณแบบไม่ติดลายน้ำ</li>
         </ul>
+        <div class="text-center mt-6">
+          <a href="https://adtlive-workshop-02.onrender.com/adt-order-landing.html"
+             class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-full">
+            ซื้อโปรแกรมถาวร
+          </a>
+        </div>
       </div>
-
     </div>
-
   </div>
 
 </body>
