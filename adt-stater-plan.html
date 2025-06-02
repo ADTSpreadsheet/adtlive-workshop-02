@@ -8,18 +8,16 @@
 </head>
 <body class="bg-blue-50 font-sans text-gray-800">
 
-  <!-- ✅ Header แบบพี่เก่ง -->
-  <!-- ✅ Header ปรับใหม่ให้ไม่กลืนพื้น -->
-<div class="bg-blue-50 text-center py-6 px-4 shadow-md border border-gray-300 rounded-lg mx-auto mb-6 max-w-3xl">
-  <h1 class="text-3xl font-extrabold text-black mb-2">ADTSpreadsheet</h1>
-  <p class="text-sm text-gray-700 leading-snug">
-    โปรแกรมออกแบบโครงสร้างบ้านพักอาศัย อาคารทั่วไป โดยวิธีหน่วยแรงใช้งาน / Working Stress Design : WSD<br>
-    โดยใช้มาตรฐานการออกแบบจากวิศวกรรมสถานแห่งประเทศไทย (ISBN 974-858-145-4 E.I.T. Standard 1007-34)
-  </p>
-</div>
+  <!-- ✅ HEADER -->
+  <div class="bg-white text-center py-6 px-4 shadow-lg border border-gray-300 rounded-lg mx-auto mb-6 max-w-3xl mt-4">
+    <h1 class="text-3xl font-extrabold text-black mb-2">ADTSpreadsheet</h1>
+    <p class="text-sm text-gray-700 leading-snug">
+      โปรแกรมออกแบบโครงสร้างบ้านพักอาศัย อาคารทั่วไป โดยวิธีหน่วยแรงใช้งาน / Working Stress Design : WSD<br>
+      โดยใช้มาตรฐานการออกแบบจากวิศวกรรมสถานแห่งประเทศไทย (ISBN 974-858-145-4 E.I.T. Standard 1007-34)
+    </p>
+  </div>
 
-
-  <!-- ✅ กล่องฟอร์มลงทะเบียน -->
+  <!-- ✅ FORM -->
   <div class="max-w-xl mx-auto my-4 p-6 bg-white shadow-lg rounded-lg">
     <h2 class="text-2xl font-bold text-center mb-4">Starter Plan Register</h2>
     
@@ -53,33 +51,59 @@
         <label class="block font-semibold mb-1">จำนวนวันที่ต้องการใช้งาน (Duration)</label>
         <select id="duration" class="w-full border px-3 py-2 rounded" required>
           <option value="">-- กรุณาเลือกจำนวนวัน --</option>
-          <!-- จะเติมด้วย JS -->
         </select>
       </div>
 
-      <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
-        เริ่มใช้งาน Starter Plan
-      </button>
+      <!-- ✅ Section แสดง QR + แนบสลิป -->
+      <div id="paymentSection" class="text-center mt-6 hidden">
+        <p class="text-lg font-semibold mb-3 text-gray-800">กรุณาแสกน QR นี้เพื่อชำระเงิน</p>
+        <img id="qrImage" src="" alt="QR Code" class="mx-auto w-64 rounded shadow-md border mb-4">
+        
+        <div class="mb-4">
+          <label class="block font-semibold mb-1">แนบสลิปการโอนเงิน</label>
+          <input type="file" id="slipFile" accept="image/*" class="mx-auto">
+        </div>
+
+        <button type="submit" class="bg-blue-600 text-white font-bold py-2 px-6 rounded hover:bg-blue-700">
+          ยืนยันการสั่งซื้อ
+        </button>
+      </div>
     </form>
   </div>
 
-  <!-- ✅ Script เติม ComboBox + กัน Submit เฉยๆ -->
+  <!-- ✅ SCRIPT -->
   <script>
-    // เพิ่มรายการ 1–15 day
     const durationSelect = document.getElementById('duration');
+    const qrImage = document.getElementById('qrImage');
+    const paymentSection = document.getElementById('paymentSection');
+
+    // เติม ComboBox 1–15 วัน
     for (let i = 1; i <= 15; i++) {
       const option = document.createElement('option');
-      option.value = `${i}`;
+      option.value = i;
       option.textContent = `${i} day`;
       durationSelect.appendChild(option);
     }
 
-    // ตัวอย่างการดัก Submit
-    document.getElementById('starterForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+    // แสดง QR ตามวัน
+    durationSelect.addEventListener('change', function () {
+      const day = parseInt(this.value);
+      if (!isNaN(day) && day >= 1 && day <= 15) {
+        const fileNumber = 142657 + day;
+        const fileName = `${fileNumber}.jpg`;
+        const imageUrl = `https://wpxpukbvynxawfxcdroj.supabase.co/storage/v1/object/public/staterplanpayslip/${fileName}`;
 
-      // พี่สามารถเปลี่ยนตรงนี้เป็น fetch('/submit-starter') ได้เลยนะ
-      alert('ระบบจะส่งข้อมูลไปยัง API ต่อไปครับ (ยังไม่เชื่อม API จริง)');
+        qrImage.src = imageUrl;
+        paymentSection.classList.remove('hidden');
+      } else {
+        paymentSection.classList.add('hidden');
+      }
+    });
+
+    // กัน submit จริงไว้ก่อน (ยังไม่เชื่อม API)
+    document.getElementById('starterForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('ข้อมูลพร้อมแล้ว รอเชื่อม API ส่งสลิป + ข้อมูลผู้ใช้ได้เลยครับพี่เก่ง!');
     });
   </script>
 
