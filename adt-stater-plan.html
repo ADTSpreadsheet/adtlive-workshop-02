@@ -12,17 +12,9 @@
   <div class="bg-white text-center py-6 px-4 shadow-lg border border-gray-300 rounded-lg mx-auto mb-6 max-w-3xl mt-4">
     <h1 class="text-3xl font-extrabold text-black mb-2">ADTSpreadsheet</h1>
     <p class="text-sm text-gray-700 leading-snug">
-      โปรแกรมออกแบบโครงสร้างบ้านพักอาศัย อาคารทั่วไป โดยวิธีหน่วยแรงใช้งาน / Working Stress Design : WSD<br>
-      โดยใช้มาตรฐานการออกแบบจากวิศวกรรมสถานแห่งประเทศไทย (ISBN 974-858-145-4 E.I.T. Standard 1007-34)
+      โปรแกรมออกแบบโครงสร้างบ้านพักอาศัย อาคารทั่วไป โดยวิธีหน่วยแรงใช้งาน (WSD)<br>
+      อ้างอิงมาตรฐานจากวิศวกรรมสถานแห่งประเทศไทย (E.I.T. Standard 1007-34)
     </p>
-  </div>
-
-  <!-- ✅ LOADING OVERLAY -->
-  <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-      <p class="text-gray-700">กำลังประมวลผล...</p>
-    </div>
   </div>
 
   <!-- ✅ FORM -->
@@ -30,58 +22,40 @@
     <h2 class="text-2xl font-bold text-center mb-4">Starter Plan Register</h2>
     
     <form id="starterForm">
-      <div class="mb-4">
-        <label class="block font-semibold mb-1">Ref. Code</label>
-        <input type="text" id="ref_code" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-      </div>
+      <label class="block font-semibold mb-1">Ref. Code</label>
+      <input type="text" id="ref_code" class="w-full border px-3 py-2 rounded" required>
 
-      <div class="mb-4">
-        <label class="block font-semibold mb-1">ชื่อ (First Name)</label>
-        <input type="text" id="first_name" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-      </div>
+      <label class="block font-semibold mt-4 mb-1">ชื่อ</label>
+      <input type="text" id="first_name" class="w-full border px-3 py-2 rounded" required>
 
-      <div class="mb-4">
-        <label class="block font-semibold mb-1">นามสกุล (Last Name)</label>
-        <input type="text" id="last_name" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-      </div>
+      <label class="block font-semibold mt-4 mb-1">นามสกุล</label>
+      <input type="text" id="last_name" class="w-full border px-3 py-2 rounded" required>
 
-      <div class="mb-4">
-        <label class="block font-semibold mb-1">เลขบัตรประชาชน 13 หลัก (National ID)</label>
-        <input type="text" id="national_id" maxlength="13" pattern="[0-9]{13}" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-        <small class="text-gray-500">ตัวเลข 13 หลักเท่านั้น</small>
-      </div>
+      <label class="block font-semibold mt-4 mb-1">เลขบัตรประชาชน 13 หลัก</label>
+      <input type="text" id="national_id" maxlength="13" pattern="[0-9]{13}" class="w-full border px-3 py-2 rounded" required>
 
-      <div class="mb-4">
-        <label class="block font-semibold mb-1">เบอร์โทรศัพท์ (Phone Number)</label>
-        <input type="tel" id="phone_number" maxlength="10" pattern="0[0-9]{8,9}" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-        <small class="text-gray-500">ขึ้นต้นด้วย 0 และมี 9-10 หลัก</small>
-      </div>
+      <label class="block font-semibold mt-4 mb-1">เบอร์โทรศัพท์</label>
+      <input type="tel" id="phone_number" maxlength="10" pattern="0[0-9]{8,9}" class="w-full border px-3 py-2 rounded" required>
 
-      <div class="mb-6">
-        <label class="block font-semibold mb-1">จำนวนวันที่ต้องการใช้งาน (Duration)</label>
-        <select id="duration" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-          <option value="">-- กรุณาเลือกจำนวนวัน --</option>
-        </select>
-      </div>
+      <label class="block font-semibold mt-4 mb-1">จำนวนวัน</label>
+      <select id="duration" class="w-full border px-3 py-2 rounded" required>
+        <option value="">-- กรุณาเลือก --</option>
+      </select>
 
-      <!-- ✅ Section แสดง QR + แนบสลิป -->
-      <div id="paymentSection" class="text-center mt-6 hidden">
-        <p class="text-lg font-semibold mb-3 text-gray-800">กรุณาแสกน QR นี้เพื่อชำระเงิน</p>
-        <img id="qrImage" src="" alt="QR Code" class="mx-auto w-64 rounded shadow-md border mb-4">
+      <div id="paymentSection" class="mt-6 hidden">
+        <p class="font-semibold mb-3">แสกน QR เพื่อชำระเงิน</p>
+        <img id="qrImage" src="" alt="QR Code" class="w-64 mx-auto rounded shadow mb-4">
         
-        <div class="mb-4 text-left">
-          <label class="block font-semibold mb-1">แนบสลิปการโอนเงิน</label>
-          <input type="file" id="slipFile" accept="image/*" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-          <small class="text-gray-500">รองรับไฟล์ JPG, PNG เท่านั้น (ขนาดไม่เกิน 10MB)</small>
-        </div>
+        <label class="block font-semibold mb-1">แนบสลิป</label>
+        <input type="file" id="slipFile" accept="image/*" class="w-full border px-3 py-2 rounded" required>
+        <small class="text-gray-500">รองรับ JPG, PNG ไม่เกิน 10MB</small>
 
-        <button type="submit" id="submitBtn" class="bg-blue-600 text-white font-bold py-3 px-8 rounded hover:bg-blue-700 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed">
+        <button type="submit" id="submitBtn" class="w-full bg-blue-600 text-white font-bold py-3 mt-5 rounded hover:bg-blue-700">
           ยืนยันการสั่งซื้อ
         </button>
       </div>
     </form>
 
-    <!-- ✅ Success/Error Messages -->
     <div id="messageContainer" class="mt-4 hidden">
       <div id="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded hidden">
         <strong>สำเร็จ!</strong> <span id="successText"></span>
@@ -92,209 +66,110 @@
     </div>
   </div>
 
-  <!-- ✅ SCRIPT -->
   <script>
-    const durationSelect = document.getElementById('duration');
-    const qrImage = document.getElementById('qrImage');
-    const paymentSection = document.getElementById('paymentSection');
-    const submitBtn = document.getElementById('submitBtn');
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    const messageContainer = document.getElementById('messageContainer');
-    const successMessage = document.getElementById('successMessage');
-    const errorMessage = document.getElementById('errorMessage');
-    const successText = document.getElementById('successText');
-    const errorText = document.getElementById('errorText');
+    const qrImage = document.getElementById("qrImage");
+    const durationSelect = document.getElementById("duration");
+    const paymentSection = document.getElementById("paymentSection");
+    const successMessage = document.getElementById("successMessage");
+    const errorMessage = document.getElementById("errorMessage");
+    const successText = document.getElementById("successText");
+    const errorText = document.getElementById("errorText");
+    const messageContainer = document.getElementById("messageContainer");
 
-    // เติม ComboBox 1–15 วัน
     for (let i = 1; i <= 15; i++) {
-      const option = document.createElement('option');
-      option.value = i;
-      option.textContent = `${i} day`;
-      durationSelect.appendChild(option);
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = `${i} วัน`;
+      durationSelect.appendChild(opt);
     }
 
-    // แสดง QR ตามวัน
-    durationSelect.addEventListener('change', function () {
-      const day = parseInt(this.value);
-      if (!isNaN(day) && day >= 1 && day <= 15) {
-        const fileNumber = 142657 + day;
-        const fileName = `${fileNumber}.jpg`;
-        const imageUrl = `https://wpxpukbvynxawfxcdroj.supabase.co/storage/v1/object/public/staterplanpayslip/${fileName}`;
-
-        qrImage.src = imageUrl;
-        paymentSection.classList.remove('hidden');
-        hideMessages();
+    durationSelect.addEventListener("change", function () {
+      const val = parseInt(this.value);
+      if (!isNaN(val)) {
+        const fileNumber = 142657 + val;
+        qrImage.src = `https://wpxpukbvynxawfxcdroj.supabase.co/storage/v1/object/public/staterplanpayslip/${fileNumber}.jpg`;
+        paymentSection.classList.remove("hidden");
       } else {
-        paymentSection.classList.add('hidden');
+        paymentSection.classList.add("hidden");
       }
     });
 
-    // ฟังก์ชันแสดง/ซ่อนข้อความ
-    function showSuccessMessage(message) {
-      successText.textContent = message;
-      successMessage.classList.remove('hidden');
-      errorMessage.classList.add('hidden');
-      messageContainer.classList.remove('hidden');
-      
-      // เลื่อนไปยังข้อความ
-      messageContainer.scrollIntoView({ behavior: 'smooth' });
+    function showSuccess(msg) {
+      successText.textContent = msg;
+      successMessage.classList.remove("hidden");
+      errorMessage.classList.add("hidden");
+      messageContainer.classList.remove("hidden");
     }
 
-    function showErrorMessage(message) {
-      errorText.textContent = message;
-      errorMessage.classList.remove('hidden');
-      successMessage.classList.add('hidden');
-      messageContainer.classList.remove('hidden');
-      
-      // เลื่อนไปยังข้อความ
-      messageContainer.scrollIntoView({ behavior: 'smooth' });
+    function showError(msg) {
+      errorText.textContent = msg;
+      errorMessage.classList.remove("hidden");
+      successMessage.classList.add("hidden");
+      messageContainer.classList.remove("hidden");
     }
 
     function hideMessages() {
-      messageContainer.classList.add('hidden');
-      successMessage.classList.add('hidden');
-      errorMessage.classList.add('hidden');
+      messageContainer.classList.add("hidden");
+      successMessage.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
 
-    function showLoading() {
-      loadingOverlay.classList.remove('hidden');
-      submitBtn.disabled = true;
-    }
-
-    function hideLoading() {
-      loadingOverlay.classList.add('hidden');
-      submitBtn.disabled = false;
-    }
-
-    // ตรวจสอบความถูกต้องของข้อมูล
-    function validateForm() {
-      const nationalId = document.getElementById('national_id').value;
-      const phoneNumber = document.getElementById('phone_number').value;
-
-      // ตรวจสอบเลขบัตรประชาชน
-      if (!/^\d{13}$/.test(nationalId)) {
-        showErrorMessage('เลขบัตรประชาชนต้องเป็นตัวเลข 13 หลัก');
-        return false;
-      }
-
-      // ตรวจสอบเบอร์โทรศัพท์
-      if (!/^0\d{8,9}$/.test(phoneNumber)) {
-        showErrorMessage('เบอร์โทรศัพท์ไม่ถูกต้อง (ต้องขึ้นต้นด้วย 0 และมี 9-10 หลัก)');
-        return false;
-      }
-
-      return true;
-    }
-
-    // ฟังก์ชันแปลงไฟล์เป็น base64
     function fileToBase64(file) {
       return new Promise((resolve, reject) => {
-        // ตรวจสอบขนาดไฟล์ (10MB)
-        if (file.size > 10 * 1024 * 1024) {
-          reject(new Error('ไฟล์มีขนาดใหญ่เกิน 10MB'));
-          return;
-        }
-
-        // ตรวจสอบประเภทไฟล์
-        if (!file.type.startsWith('image/')) {
-          reject(new Error('กรุณาเลือกไฟล์รูปภาพเท่านั้น'));
-          return;
-        }
-
+        if (file.size > 10 * 1024 * 1024) return reject("ไฟล์เกิน 10MB");
+        if (!file.type.startsWith("image/")) return reject("กรุณาเลือกไฟล์รูปภาพเท่านั้น");
         const reader = new FileReader();
         reader.onload = () => resolve(reader.result);
-        reader.onerror = () => reject(new Error('ไม่สามารถอ่านไฟล์ได้'));
+        reader.onerror = () => reject("อ่านไฟล์ไม่สำเร็จ");
         reader.readAsDataURL(file);
       });
     }
 
-    // เชื่อม API1 - Submit Form
-    document.getElementById('starterForm').addEventListener('submit', async function (e) {
+    document.getElementById("starterForm").addEventListener("submit", async function (e) {
       e.preventDefault();
-      
-      // ตรวจสอบความถูกต้องของข้อมูล
-      if (!validateForm()) {
-        return;
-      }
-
-      const slipFile = document.getElementById('slipFile').files[0];
-      if (!slipFile) {
-        showErrorMessage('กรุณาแนบสลิปการโอนเงิน');
-        return;
-      }
-
-      showLoading();
       hideMessages();
 
+      const slipFile = document.getElementById("slipFile").files[0];
+      if (!slipFile) return showError("กรุณาแนบสลิป");
+
       try {
-        // แปลงไฟล์เป็น base64
-        const base64String = await fileToBase64(slipFile);
-        
-        // เตรียมข้อมูลส่ง API
-        const formData = {
-          ref_code: document.getElementById('ref_code').value.trim(),
-          first_name: document.getElementById('first_name').value.trim(),
-          last_name: document.getElementById('last_name').value.trim(),
-          national_id: document.getElementById('national_id').value.trim(),
-          phone_number: document.getElementById('phone_number').value.trim(),
-          duration: parseInt(document.getElementById('duration').value),
-          file_content: base64String
+        const base64 = await fileToBase64(slipFile);
+        const payload = {
+          ref_code: document.getElementById("ref_code").value,
+          first_name: document.getElementById("first_name").value,
+          last_name: document.getElementById("last_name").value,
+          national_id: document.getElementById("national_id").value,
+          phone_number: document.getElementById("phone_number").value,
+          duration: parseInt(document.getElementById("duration").value),
+          file_content: base64
         };
 
-        console.log('📤 ส่งข้อมูลไปยัง API:', { ...formData, file_content: 'base64...' });
-
-        // ส่งข้อมูลไปยัง API1
-        const response = await fetch('/api/submit-starter-slip', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
+        const res = await fetch("/api/submit-starter-slip", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
         });
 
-        const result = await response.json();
-        console.log('📥 ได้รับการตอบกลับจาก API:', result);
-
-        if (response.ok && result.success) {
-          // สำเร็จ
-          showSuccessMessage(`ส่งข้อมูลสำเร็จ! Ref Code: ${result.data?.ref_code || formData.ref_code} - กรุณารอการอนุมัติจากแอดมิน`);
-          
-          // เคลียร์ฟอร์ม
-          document.getElementById('starterForm').reset();
-          paymentSection.classList.add('hidden');
-          
-        } else {
-          // มีข้อผิดพลาดจาก API
-          const errorMsg = result.message || 'เกิดข้อผิดพลาดไม่ทราบสาเหตุ';
-          showErrorMessage(errorMsg);
-          
-          // แสดงรายละเอียดข้อผิดพลาด (ถ้ามี)
-          if (result.errors && Array.isArray(result.errors)) {
-            console.error('รายละเอียดข้อผิดพลาด:', result.errors);
-          }
+        let result = {};
+        try {
+          result = await res.json();
+        } catch (err) {
+          console.warn("⚠️ ไม่สามารถแปลง JSON ได้:", err);
         }
 
-      } catch (error) {
-        console.error('❌ เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
-        
-        if (error.name === 'TypeError' && error.message.includes('fetch')) {
-          showErrorMessage('ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต');
+        if (res.status === 200) {
+          showSuccess("ส่งข้อมูลสำเร็จแล้ว กรุณารอแอดมินตรวจสอบ");
+          document.getElementById("starterForm").reset();
+          paymentSection.classList.add("hidden");
         } else {
-          showErrorMessage(error.message || 'เกิดข้อผิดพลาดในการส่งข้อมูล');
+          showError(result?.message || "เกิดข้อผิดพลาดจากระบบ");
         }
-      } finally {
-        hideLoading();
+
+      } catch (err) {
+        console.error("❌ ERROR:", err);
+        showError(err.message || "ไม่สามารถส่งข้อมูลได้");
       }
     });
-
-    // เพิ่ม event listener สำหรับการเปลี่ยนแปลงในฟอร์ม
-    ['ref_code', 'first_name', 'last_name', 'national_id', 'phone_number'].forEach(id => {
-      document.getElementById(id).addEventListener('input', hideMessages);
-    });
-
-    document.getElementById('duration').addEventListener('change', hideMessages);
-    document.getElementById('slipFile').addEventListener('change', hideMessages);
   </script>
-
 </body>
 </html>
