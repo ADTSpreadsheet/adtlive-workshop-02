@@ -158,17 +158,11 @@
         }
 
         if (res.status === 200) {
-          // ✅ แสดงข้อความสำเร็จก่อน
-          showSuccess("ส่งข้อมูลสำเร็จแล้ว กำลังเปิดหน้าขอบคุณ...");
+          // ✅ แสดงข้อความสำเร็จสั้นๆ
+          showSuccess("ส่งข้อมูลสำเร็จแล้ว!");
           
-          // ✅ รอ 2 วินาทีแล้วเปิดหน้า Thank You
-          setTimeout(function() {
-            window.location.href = "https://adtlive-workshop-02.onrender.com/staterplan-thankyou.html";
-          }, 2000);
-          
-          // ✅ รีเซ็ตฟอร์ม
-          document.getElementById("starterForm").reset();
-          paymentSection.classList.add("hidden");
+          // ✅ เปิดหน้า Thank You ทันที (ไม่มี delay)
+          window.location.href = "https://adtlive-workshop-02.onrender.com/staterplan-thankyou.html";
           
         } else {
           showError(result?.message || "เกิดข้อผิดพลาดจากระบบ");
