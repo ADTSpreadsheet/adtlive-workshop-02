@@ -144,7 +144,7 @@
           file_content: base64
         };
 
-        const res = await fetch("/api/submit-starter-slip", {
+        const res = await fetch("/starter/submit-starter-slip", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
