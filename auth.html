@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ยืนยันตัวตน - ADTSpreadsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .qr-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .adt-logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            background: #f8f9fa;
+            border: 3px dashed #28a745;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .qr-instructions {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .qr-instructions h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .qr-instructions p {
+            color: #424242;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .auth-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .auth-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-title h2 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+        }
+
+        .auth-tab.active {
+            background: #2196f3;
+            color: white;
+        }
+
+        .auth-tab:hover {
+            background: #e3f2fd;
+        }
+
+        .auth-tab.active:hover {
+            background: #1976d2;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2196f3;
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .new-user-content {
+            text-align: center;
+        }
+
+        .new-user-content h3 {
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .new-user-content p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .status-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin: 20px auto;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .adt-logo, .qr-code {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ADTSpreadsheet</h1>
+        <p>โปรแกรมลองนสรุปไว้คลายสำเนาข้อมูล สร้างระบบทีม อากษวายคิต / Working Stress Design : WSD</p>
+    </div>
+
+    <div class="main-container">
+        <!-- QR Code Section -->
+        <div class="qr-section">
+            <div class="adt-logo">
+                ADT<br>
+                <span style="font-size: 1rem;">BUILDING</span>
+            </div>
+            
+            <div class="qr-code">
+                📱 QR Code จะแสดงที่นี่
+            </div>
+
+            <div class="qr-instructions">
+                <h3>📍 คำแนะนำสำหรับผู้ใช้ใหม่</h3>
+                <p>1. เปิดแอป LINE บนมือถือของคุณ</p>
+                <p>2. สแกน QR Code ด้านบนเพื่อเพิ่มเพื่อน ADTLine-Bot</p>
+                <p>3. รับ Ref.Code จากการสนทนาใน LINE</p>
+                <p>4. นำ Ref.Code มากรอกในฟอร์มด้านขวา</p>
+                <p>5. กรุณาพิมพ์ "req_refcode" เพื่อขอ Serial Key</p>
+            </div>
+        </div>
+
+        <!-- Authentication Section -->
+        <div class="auth-section">
+            <div class="auth-title">
+                <h2>🔐 ยืนยันตัวตน</h2>
+                <p>กรุณาเลือกวิธีการยืนยันตัวตน</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('new-user')">
+                    🆕 ผู้ใช้ใหม่
+                </button>
+                <button class="auth-tab" onclick="switchTab('existing-user')">
+                    👤 มีรหัสแล้ว
+                </button>
+            </div>
+
+            <!-- New User Tab -->
+            <div id="new-user" class="tab-content active">
+                <div class="new-user-content">
+                    <h3>🎉 ยินดีต้อนรับสู่ ADTSpreadsheet!</h3>
+                    <p>สำหรับผู้ใช้ใหม่ กรุณาสแกน QR Code ด้านซ้ายเพื่อรับ Ref.Code</p>
+                    <p>หลังจากได้รับ Ref.Code แล้ว กรุณาเปลี่ยนมาที่แท็บ "มีรหัสแล้ว"</p>
+                </div>
+            </div>
+
+            <!-- Existing User Tab -->
+            <div id="existing-user" class="tab-content">
+                <form id="authForm">
+                    <div class="form-group">
+                        <label for="refCode">Ref.Code:</label>
+                        <input type="text" id="refCode" name="refCode" placeholder="กรุณากรอก Ref.Code" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="serialKey">Serial Key:</label>
+                        <input type="text" id="serialKey" name="serialKey" placeholder="กรุณากรอก Serial Key" required>
+                    </div>
+
+                    <button type="button" class="btn" onclick="getSerialKey()" id="verifyBtn">
+                        Verify Code
+                    </button>
+
+                    <button type="submit" class="btn" style="margin-top: 10px;" id="confirmBtn">
+                        Confirm
+                    </button>
+                </form>
+
+                <div id="statusMessage" class="status-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <p>📞 หากมีปัญหาในการยืนยันตัวตน กรุณาติดต่อทีมงาน ADT</p>
+        <p>🔒 ข้อมูลของคุณได้รับการปกป้องด้วยระบบความปลอดภัยขั้นสูง</p>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // ซ่อนทุก tab content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // ลบ active class จากทุกปุ่ม
+            const tabs = document.querySelectorAll('.auth-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // แสดง tab ที่เลือก
+            document.getElementById(tabName).classList.add('active');
+            
+            // เพิ่ม active class ให้ปุ่มที่กด
+            event.target.classList.add('active');
+        }
+
+        async function getSerialKey() {
+            const refCode = document.getElementById('refCode').value.trim();
+            const verifyBtn = document.getElementById('verifyBtn');
+            const statusMessage = document.getElementById('statusMessage');
+
+            if (!refCode) {
+                showMessage('กรุณากรอก Ref.Code', 'error');
+                return;
+            }
+
+            // แสดงสถานะกำลังโหลด
+            verifyBtn.disabled = true;
+            verifyBtn.textContent = 'กำลังตรวจสอบ...';
+
+            try {
+                const response = await fetch('/verify-refcode', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ ref_code: refCode })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showMessage('✅ ส่ง Serial Key ผ่าน LINE สำเร็จ! กรุณาตรวจสอบใน LINE Chat', 'success');
+                } else {
+                    showMessage('❌ ' + result.message, 'error');
+                }
+            } catch (error) {
+                showMessage('❌ เกิดข้อผิดพลาดในการเชื่อมต่อ', 'error');
+            } finally {
+                verifyBtn.disabled = false;
+                verifyBtn.textContent = 'Verify Code';
+            }
+        }
+
+        function showMessage(message, type) {
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${type}`;
+            statusMessage.style.display = 'block';
+
+            // ซ่อนข้อความหลัง 5 วินาที
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        // Handle form submission
+        document.getElementById('authForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const refCode = document.getElementById('refCode').value.trim();
+            const serialKey = document.getElementById('serialKey').value.trim();
+
+            if (!refCode || !serialKey) {
+                showMessage('กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+                return;
+            }
+
+            // TODO: ส่งข้อมูลไปยืนยัน serial key
+            showMessage('🔄 กำลังยืนยันตัวตน...', 'success');
+            
+            // Simulate authentication process
+            setTimeout(() => {
+                showMessage('✅ ยืนยันตัวตนสำเร็จ! กำลังเข้าสู่ระบบ...', 'success');
+                
+                // TODO: Redirect to appropriate page based on plan
+                const urlParams = new URLSearchParams(window.location.search);
+                const plan = urlParams.get('plan') || 'starter';
+                
+                setTimeout(() => {
+                    if (plan === 'professional') {
+                        window.location.href = '/pro-dashboard';
+                    } else {
+                        window.location.href = '/starter-dashboard';
+                    }
+                }, 2000);
+            }, 2000);
+        });
+
+        // Get plan from URL parameter
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const plan = urlParams.get('plan');
+            
+            if (plan) {
+                const planText = plan === 'professional' ? 'Professional Plan' : 'Starter Plan';
+                document.title = `ยืนยันตัวตน - ${planText} | ADTSpreadsheet`;
+            }
+        });
+    </script>
+</body>
+</html>
