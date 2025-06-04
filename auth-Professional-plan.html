@@ -356,6 +356,11 @@
                             <p>กรุณาตรวจสอบ Serial Key ใน LINE Chat แล้วกรอกด้านล่าง</p>
                             
                             <div class="form-group">
+                                <label for="newUserRefCodeStep2">Ref.Code:</label>
+                                <input type="text" id="newUserRefCodeStep2" placeholder="Ref.Code จะถูกกรอกอัตโนมัติ" style="background-color: #f8f9fa; color: #6c757d;" readonly>
+                            </div>
+                            
+                            <div class="form-group">
                                 <label for="newUserSerialKey">Serial Key:</label>
                                 <input type="text" id="newUserSerialKey" placeholder="กรุณากรอก Serial Key ที่ได้จาก LINE" required>
                             </div>
@@ -417,9 +422,10 @@
 
                 if (result.success) {
                     showMessage('✅ ส่ง Serial Key ผ่าน LINE สำเร็จ!', 'success');
-                    // แสดง Step 2
+                    // แสดง Step 2 และกรอก Ref.Code อัตโนมัติ
                     document.getElementById('step1').style.display = 'none';
                     document.getElementById('step2').style.display = 'block';
+                    document.getElementById('newUserRefCodeStep2').value = refCode;
                 } else {
                     showMessage('❌ ' + result.message, 'error');
                 }
@@ -435,7 +441,7 @@
             let refCode, serialKey, confirmBtn;
 
             if (type === 'new') {
-                refCode = document.getElementById('newUserRefCode').value.trim();
+                refCode = document.getElementById('newUserRefCodeStep2').value.trim();
                 serialKey = document.getElementById('newUserSerialKey').value.trim();
                 confirmBtn = document.getElementById('confirmNewBtn');
             } else {
