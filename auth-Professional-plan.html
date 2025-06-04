@@ -405,7 +405,7 @@
             verifyBtn.textContent = 'กำลังตรวจสอบ...';
 
             try {
-                const response = await fetch('/verify-refcode', {
+                const response = await fetch('https://line-bot-adt.onrender.com/verify-refcode', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
