@@ -37,16 +37,12 @@
         }
 
         .main-container {
-            max-width: 1200px;
+            max-width: 600px;
             margin: 40px auto;
             padding: 0 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
         }
 
-        .qr-section {
+        .auth-section {
             background: white;
             border-radius: 15px;
             padding: 30px;
@@ -57,56 +53,39 @@
         .adt-logo {
             width: 200px;
             height: 200px;
-            margin: 0 auto 20px;
-            background: #f8f9fa;
-            border: 3px dashed #28a745;
+            margin: 0 auto 30px;
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            font-weight: bold;
-            color: #28a745;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
 
-        .qr-code {
-            width: 200px;
-            height: 200px;
-            margin: 20px auto;
-            background: #f8f9fa;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .qr-instructions {
+        .instructions {
             background: #e3f2fd;
             padding: 20px;
             border-radius: 10px;
-            margin-top: 20px;
+            margin-bottom: 30px;
             text-align: left;
         }
 
-        .qr-instructions h3 {
+        .instructions h3 {
             color: #1976d2;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-align: center;
         }
 
-        .qr-instructions p {
+        .instructions p {
             color: #424242;
             line-height: 1.6;
             margin-bottom: 8px;
         }
 
-        .auth-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        .qr-code {
+            width: 250px;
+            height: 250px;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
 
         .auth-title {
@@ -259,8 +238,6 @@
 
         @media (max-width: 768px) {
             .main-container {
-                grid-template-columns: 1fr;
-                gap: 20px;
                 margin: 20px auto;
             }
 
@@ -268,9 +245,15 @@
                 font-size: 2rem;
             }
 
-            .adt-logo, .qr-code {
+            .adt-logo {
                 width: 150px;
                 height: 150px;
+                font-size: 2rem;
+            }
+
+            .qr-code {
+                width: 200px;
+                height: 200px;
             }
         }
     </style>
@@ -282,29 +265,31 @@
     </div>
 
     <div class="main-container">
-        <!-- QR Code Section -->
-        <div class="qr-section">
+        <!-- Main Authentication Section -->
+        <div class="auth-section">
+            <!-- Logo และคำแนะนำ -->
             <div class="adt-logo">
-                ADT<br>
-                <span style="font-size: 1rem;">BUILDING</span>
+                <img src="https://wpxpukbvynxawfxcdroj.supabase.co/storage/v1/object/public/chat-media//ADT%20MAIN%20LOGO.jpg" 
+                     alt="ADT Building Logo" 
+                     style="width: 100%; height: 100%; object-fit: contain; border-radius: 7px;">
             </div>
             
-            <div class="qr-code">
-                📱 QR Code จะแสดงที่นี่
-            </div>
-
-            <div class="qr-instructions">
+            <div class="instructions">
                 <h3>📍 คำแนะนำสำหรับผู้ใช้ใหม่</h3>
                 <p>1. เปิดแอป LINE บนมือถือของคุณ</p>
-                <p>2. สแกน QR Code ด้านบนเพื่อเพิ่มเพื่อน ADTLine-Bot</p>
+                <p>2. สแกน QR Code เพื่อเพิ่มเพื่อน ADTLine-Bot</p>
                 <p>3. รับ Ref.Code จากการสนทนาใน LINE</p>
-                <p>4. นำ Ref.Code มากรอกในฟอร์มด้านขวา</p>
-                <p>5. กรุณาพิมพ์ "req_refcode" เพื่อขอ Serial Key</p>
+                <p>4. กรุณาพิมพ์ "req_refcode" เพื่อขอ Serial Key</p>
             </div>
-        </div>
 
-        <!-- Authentication Section -->
-        <div class="auth-section">
+            <!-- QR Code -->
+            <div class="qr-code" id="qrCode" style="display: none;">
+                <img src="https://wpxpukbvynxawfxcdroj.supabase.co/storage/v1/object/public/chat-media//ADTLine-Bot.jpg" 
+                     alt="ADTLine-Bot QR Code" 
+                     style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+            </div>
+
+            <!-- ยืนยันตัวตน Section -->
             <div class="auth-title">
                 <h2>🔐 ยืนยันตัวตน</h2>
                 <p>กรุณาเลือกวิธีการยืนยันตัวตน</p>
@@ -319,39 +304,12 @@
                 </button>
             </div>
 
-            <!-- New User Tab -->
-            <div id="new-user" class="tab-content active">
-                <div class="new-user-content">
-                    <h3>🎉 ยินดีต้อนรับสู่ ADTSpreadsheet!</h3>
-                    <p>สำหรับผู้ใช้ใหม่ กรุณาสแกน QR Code ด้านซ้ายเพื่อรับ Ref.Code</p>
-                    <p>หลังจากได้รับ Ref.Code แล้ว กรุณาเปลี่ยนมาที่แท็บ "มีรหัสแล้ว"</p>
-                </div>
+            <!-- Dynamic Content Area -->
+            <div id="dynamicContent">
+                <!-- เนื้อหาจะถูกเปลี่ยนตาม tab ที่เลือก -->
             </div>
 
-            <!-- Existing User Tab -->
-            <div id="existing-user" class="tab-content">
-                <form id="authForm">
-                    <div class="form-group">
-                        <label for="refCode">Ref.Code:</label>
-                        <input type="text" id="refCode" name="refCode" placeholder="กรุณากรอก Ref.Code" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="serialKey">Serial Key:</label>
-                        <input type="text" id="serialKey" name="serialKey" placeholder="กรุณากรอก Serial Key" required>
-                    </div>
-
-                    <button type="button" class="btn" onclick="getSerialKey()" id="verifyBtn">
-                        Verify Code
-                    </button>
-
-                    <button type="submit" class="btn" style="margin-top: 10px;" id="confirmBtn">
-                        Confirm
-                    </button>
-                </form>
-
-                <div id="statusMessage" class="status-message"></div>
-            </div>
+            <div id="statusMessage" class="status-message"></div>
         </div>
     </div>
 
@@ -362,32 +320,86 @@
 
     <script>
         function switchTab(tabName) {
-            // ซ่อนทุก tab content
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => content.classList.remove('active'));
-
             // ลบ active class จากทุกปุ่ม
             const tabs = document.querySelectorAll('.auth-tab');
             tabs.forEach(tab => tab.classList.remove('active'));
 
-            // แสดง tab ที่เลือก
-            document.getElementById(tabName).classList.add('active');
-            
             // เพิ่ม active class ให้ปุ่มที่กด
             event.target.classList.add('active');
+
+            // แสดงเนื้อหาตาม tab ที่เลือก
+            const dynamicContent = document.getElementById('dynamicContent');
+            const qrCode = document.getElementById('qrCode');
+
+            if (tabName === 'new-user') {
+                // แสดง QR Code และฟอร์มสำหรับผู้ใช้ใหม่
+                qrCode.style.display = 'block';
+                dynamicContent.innerHTML = `
+                    <div class="new-user-flow">
+                        <div class="step-1" id="step1">
+                            <h3>🎉 ยินดีต้อนรับสู่ ADTSpreadsheet!</h3>
+                            <p>กรุณาสแกน QR Code ด้านบนเพื่อรับ Ref.Code</p>
+                            
+                            <div class="form-group" style="margin-top: 20px;">
+                                <label for="newUserRefCode">Ref.Code:</label>
+                                <input type="text" id="newUserRefCode" placeholder="กรุณากรอก Ref.Code ที่ได้จาก LINE" required>
+                            </div>
+                            
+                            <button type="button" class="btn" onclick="verifyRefCodeNewUser()" id="verifyRefBtn">
+                                Verify Ref.Code
+                            </button>
+                        </div>
+                        
+                        <div class="step-2" id="step2" style="display: none;">
+                            <h3>✅ ได้รับ Serial Key แล้ว!</h3>
+                            <p>กรุณาตรวจสอบ Serial Key ใน LINE Chat แล้วกรอกด้านล่าง</p>
+                            
+                            <div class="form-group">
+                                <label for="newUserSerialKey">Serial Key:</label>
+                                <input type="text" id="newUserSerialKey" placeholder="กรุณากรอก Serial Key ที่ได้จาก LINE" required>
+                            </div>
+                            
+                            <button type="button" class="btn" onclick="confirmAuthentication('new')" id="confirmNewBtn">
+                                ยืนยันตัวตน
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // ซ่อน QR Code และแสดงฟอร์มสำหรับผู้ที่มีรหัสแล้ว
+                qrCode.style.display = 'none';
+                dynamicContent.innerHTML = `
+                    <div class="existing-user-form">
+                        <h3>👤 ยืนยันตัวตนด้วยรหัสที่มีอยู่</h3>
+                        <p>กรุณากรอก Ref.Code และ Serial Key</p>
+                        
+                        <div class="form-group">
+                            <label for="existingRefCode">Ref.Code:</label>
+                            <input type="text" id="existingRefCode" placeholder="กรุณากรอก Ref.Code" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="existingSerialKey">Serial Key:</label>
+                            <input type="text" id="existingSerialKey" placeholder="กรุณากรอก Serial Key" required>
+                        </div>
+
+                        <button type="button" class="btn" onclick="confirmAuthentication('existing')" id="confirmExistingBtn">
+                            ยืนยันตัวตน
+                        </button>
+                    </div>
+                `;
+            }
         }
 
-        async function getSerialKey() {
-            const refCode = document.getElementById('refCode').value.trim();
-            const verifyBtn = document.getElementById('verifyBtn');
-            const statusMessage = document.getElementById('statusMessage');
+        async function verifyRefCodeNewUser() {
+            const refCode = document.getElementById('newUserRefCode').value.trim();
+            const verifyBtn = document.getElementById('verifyRefBtn');
 
             if (!refCode) {
                 showMessage('กรุณากรอก Ref.Code', 'error');
                 return;
             }
 
-            // แสดงสถานะกำลังโหลด
             verifyBtn.disabled = true;
             verifyBtn.textContent = 'กำลังตรวจสอบ...';
 
@@ -403,7 +415,10 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    showMessage('✅ ส่ง Serial Key ผ่าน LINE สำเร็จ! กรุณาตรวจสอบใน LINE Chat', 'success');
+                    showMessage('✅ ส่ง Serial Key ผ่าน LINE สำเร็จ!', 'success');
+                    // แสดง Step 2
+                    document.getElementById('step1').style.display = 'none';
+                    document.getElementById('step2').style.display = 'block';
                 } else {
                     showMessage('❌ ' + result.message, 'error');
                 }
@@ -411,7 +426,56 @@
                 showMessage('❌ เกิดข้อผิดพลาดในการเชื่อมต่อ', 'error');
             } finally {
                 verifyBtn.disabled = false;
-                verifyBtn.textContent = 'Verify Code';
+                verifyBtn.textContent = 'Verify Ref.Code';
+            }
+        }
+
+        async function confirmAuthentication(type) {
+            let refCode, serialKey, confirmBtn;
+
+            if (type === 'new') {
+                refCode = document.getElementById('newUserRefCode').value.trim();
+                serialKey = document.getElementById('newUserSerialKey').value.trim();
+                confirmBtn = document.getElementById('confirmNewBtn');
+            } else {
+                refCode = document.getElementById('existingRefCode').value.trim();
+                serialKey = document.getElementById('existingSerialKey').value.trim();
+                confirmBtn = document.getElementById('confirmExistingBtn');
+            }
+
+            if (!refCode || !serialKey) {
+                showMessage('กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+                return;
+            }
+
+            confirmBtn.disabled = true;
+            confirmBtn.textContent = 'กำลังยืนยัน...';
+
+            try {
+                // TODO: ส่งข้อมูลไปยืนยัน serial key
+                showMessage('🔄 กำลังยืนยันตัวตน...', 'success');
+                
+                // Simulate authentication process
+                setTimeout(() => {
+                    showMessage('✅ ยืนยันตัวตนสำเร็จ! กำลังเข้าสู่ระบบ...', 'success');
+                    
+                    // TODO: Redirect to appropriate page based on plan
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const plan = urlParams.get('plan') || 'starter';
+                    
+                    setTimeout(() => {
+                        if (plan === 'professional') {
+                            window.location.href = '/pro-dashboard';
+                        } else {
+                            window.location.href = '/starter-dashboard';
+                        }
+                    }, 2000);
+                }, 2000);
+            } catch (error) {
+                showMessage('❌ เกิดข้อผิดพลาดในการยืนยัน', 'error');
+            } finally {
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = 'ยืนยันตัวตน';
             }
         }
 
@@ -427,40 +491,7 @@
             }, 5000);
         }
 
-        // Handle form submission
-        document.getElementById('authForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const refCode = document.getElementById('refCode').value.trim();
-            const serialKey = document.getElementById('serialKey').value.trim();
-
-            if (!refCode || !serialKey) {
-                showMessage('กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
-                return;
-            }
-
-            // TODO: ส่งข้อมูลไปยืนยัน serial key
-            showMessage('🔄 กำลังยืนยันตัวตน...', 'success');
-            
-            // Simulate authentication process
-            setTimeout(() => {
-                showMessage('✅ ยืนยันตัวตนสำเร็จ! กำลังเข้าสู่ระบบ...', 'success');
-                
-                // TODO: Redirect to appropriate page based on plan
-                const urlParams = new URLSearchParams(window.location.search);
-                const plan = urlParams.get('plan') || 'starter';
-                
-                setTimeout(() => {
-                    if (plan === 'professional') {
-                        window.location.href = '/pro-dashboard';
-                    } else {
-                        window.location.href = '/starter-dashboard';
-                    }
-                }, 2000);
-            }, 2000);
-        });
-
-        // Get plan from URL parameter
+        // Initialize page
         window.addEventListener('load', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const plan = urlParams.get('plan');
@@ -469,6 +500,9 @@
                 const planText = plan === 'professional' ? 'Professional Plan' : 'Starter Plan';
                 document.title = `ยืนยันตัวตน - ${planText} | ADTSpreadsheet`;
             }
+
+            // เริ่มต้นด้วย tab ผู้ใช้ใหม่
+            switchTab('new-user');
         });
     </script>
 </body>
