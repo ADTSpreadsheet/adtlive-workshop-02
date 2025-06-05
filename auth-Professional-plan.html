@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ยืนยันตัวตน - ADTSpreadsheet</title>
+    <title>ยืนยันตัวตน - Professional Plan | ADTSpreadsheet</title>
     <style>
         * {
             margin: 0;
@@ -34,6 +34,18 @@
         .header p {
             font-size: 1.1rem;
             opacity: 0.9;
+        }
+
+        .plan-badge {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-top: 10px;
+            box-shadow: 0 3px 10px rgba(255, 152, 0, 0.3);
         }
 
         .main-container {
@@ -119,16 +131,16 @@
         }
 
         .auth-tab.active {
-            background: #2196f3;
+            background: #FF9800;
             color: white;
         }
 
         .auth-tab:hover {
-            background: #e3f2fd;
+            background: #fff3e0;
         }
 
         .auth-tab.active:hover {
-            background: #1976d2;
+            background: #F57C00;
         }
 
         .tab-content {
@@ -161,8 +173,8 @@
 
         .form-group input:focus {
             outline: none;
-            border-color: #2196f3;
-            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+            border-color: #FF9800;
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1);
         }
 
         .form-group input:disabled {
@@ -174,7 +186,7 @@
         .btn {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, #2196f3, #1976d2);
+            background: linear-gradient(135deg, #FF9800, #F57C00);
             color: white;
             border: none;
             border-radius: 8px;
@@ -185,9 +197,9 @@
         }
 
         .btn:hover {
-            background: linear-gradient(135deg, #1976d2, #1565c0);
+            background: linear-gradient(135deg, #F57C00, #E65100);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
         }
 
         .btn:disabled {
@@ -206,7 +218,7 @@
         }
 
         .new-user-content h3 {
-            color: #28a745;
+            color: #FF9800;
             margin-bottom: 15px;
         }
 
@@ -271,6 +283,7 @@
 <body>
     <div class="header">
         <h1>ADTSpreadsheet</h1>
+        <div class="plan-badge">🏆 Professional Plan</div>
         <p>โปรแกรมออกแบบโครงสร้างบ้านพักอาศัย อาคารทั่วไป โดยวิธีหน่วยแรงใช้งาน / Working Stress Design : WSD</p>
         <p>โดยใช้มาตรฐานการออกแบบจากวิศวกรรมสถานแห่งประเทศไทย (ISBN 974-858-145-4 E.I.T. Standard 1007-34)</p>
     </div>
@@ -286,7 +299,7 @@
             </div>
             
             <div class="instructions">
-                <h3>📍 คำแนะนำสำหรับผู้ใช้ใหม่</h3>
+                <h3>📍 คำแนะนำสำหรับผู้ใช้ Professional Plan</h3>
                 <p>1. เปิดแอป LINE บนมือถือของคุณ</p>
                 <p>2. สแกน QR Code เพื่อเพิ่มเพื่อน ADTLine-Bot</p>
                 <p>3. รับ Ref.Code จากการสนทนาใน LINE</p>
@@ -325,6 +338,7 @@
     </div>
 
     <div class="footer-note">
+        <p>🏆 Professional Plan - ฟีเจอร์ครบครัน สำหรับงานออกแบบระดับมืออาชีพ</p>
         <p>📞 หากมีปัญหาในการยืนยันตัวตน กรุณาติดต่อทีมงาน ADT</p>
         <p>🔒 ข้อมูลของคุณได้รับการปกป้องด้วยระบบความปลอดภัยขั้นสูง</p>
     </div>
@@ -347,7 +361,7 @@
                 qrCode.style.display = 'block';
                 dynamicContent.innerHTML = `
                     <div class="new-user-flow">
-                        <h3>🎉 ยินดีต้อนรับสู่ ADTSpreadsheet!</h3>
+                        <h3>🎉 ยินดีต้อนรับสู่ ADTSpreadsheet Professional!</h3>
                         <p>กรุณาสแกน QR Code ด้านบนเพื่อรับ Ref.Code</p>
                         
                         <div class="form-group" style="margin-top: 20px;">
@@ -378,7 +392,7 @@
                 dynamicContent.innerHTML = `
                     <div class="existing-user-form">
                         <h3>👤 ยืนยันตัวตนด้วยรหัสที่มีอยู่</h3>
-                        <p>กรุณากรอก Ref.Code และ Serial Key</p>
+                        <p>กรุณากรอก Ref.Code และ Serial Key สำหรับ Professional Plan</p>
                         
                         <div class="form-group">
                             <label for="existingRefCode">Ref.Code:</label>
@@ -485,11 +499,11 @@
                 const result = await response.json();
 
                 if (response.status === 200 && result.success) {
-                    showMessage('✅ ยืนยันตัวตนสำเร็จ! กำลังเข้าสู่ระบบ...', 'success');
+                    showMessage('✅ ยืนยันตัวตนสำเร็จ! กำลังเข้าสู่ระบบ Professional Plan...', 'success');
                     
-                    // Redirect ไปหน้า starter plan หลังจาก 2 วินาที
+                    // Redirect ไปหน้า Professional Plan (adt-order-landing.html)
                     setTimeout(() => {
-                        window.location.href = 'https://adtlive-workshop-02.onrender.com/adt-stater-plan.html';
+                        window.location.href = 'https://adtlive-workshop-02.onrender.com/adt-order-landing.html';
                     }, 2000);
                     
                 } else {
@@ -517,13 +531,8 @@
 
         // Initialize page
         window.addEventListener('load', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const plan = urlParams.get('plan');
-            
-            if (plan) {
-                const planText = plan === 'professional' ? 'Professional Plan' : 'Starter Plan';
-                document.title = `ยืนยันตัวตน - ${planText} | ADTSpreadsheet`;
-            }
+            // ตั้งค่า title สำหรับ Professional Plan
+            document.title = 'ยืนยันตัวตน - Professional Plan | ADTSpreadsheet';
 
             // เริ่มต้นด้วย tab ผู้ใช้ใหม่
             switchTab('new-user');
