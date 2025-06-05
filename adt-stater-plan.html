@@ -3,66 +3,212 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Starter Plan Register - ADTSpreadsheet</title>
+  <title>🚀 Starter Plan Register - ADTSpreadsheet</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+      min-height: 100vh;
+    }
+    
+    .form-input {
+      transition: all 0.3s ease;
+      border: 2px solid #e5e7eb;
+    }
+    
+    .form-input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      outline: none;
+    }
+    
+    .emoji-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #374151;
+    }
+    
+    .gradient-button {
+      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      transition: all 0.3s ease;
+    }
+    
+    .gradient-button:hover {
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
+    }
+    
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .success-message, .error-message {
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-<body class="bg-blue-50 font-sans text-gray-800">
+<body class="min-h-screen">
 
-  <!-- ✅ HEADER -->
-  <div class="bg-white text-center py-6 px-4 shadow-lg border border-gray-300 rounded-lg mx-auto mb-6 max-w-3xl mt-4">
-    <h1 class="text-3xl font-extrabold text-black mb-2">ADTSpreadsheet</h1>
-    <p class="text-sm text-gray-700 leading-snug">
-      โปรแกรมออกแบบโครงสร้างบ้านพักอาศัย อาคารทั่วไป โดยวิธีหน่วยแรงใช้งาน (WSD)<br>
-      อ้างอิงมาตรฐานจากวิศวกรรมสถานแห่งประเทศไทย (E.I.T. Standard 1007-34)
+  <!-- ✨ HEADER -->
+  <div class="bg-white text-center py-8 px-6 shadow-xl border border-gray-200 rounded-2xl mx-auto mb-8 max-w-4xl mt-6 card-hover">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">
+      🏗️ ADTSpreadsheet
+    </h1>
+    <p class="text-gray-600 leading-relaxed mb-4">
+      💡 โปรแกรมออกแบบโครงสร้างบ้านพักอาศัย อาคารทั่วไป โดยวิธีหน่วยแรงใช้งาน (WSD)<br>
+      📚 อ้างอิงมาตรฐานจากวิศวกรรมสถานแห่งประเทศไทย (E.I.T. Standard 1007-34)
     </p>
+    <div class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full">
+      <span class="mr-2">🎯</span>
+      <span class="font-semibold">Starter Plan</span>
+    </div>
   </div>
 
-  <!-- ✅ FORM -->
-  <div class="max-w-xl mx-auto my-4 p-6 bg-white shadow-lg rounded-lg">
-    <h2 class="text-2xl font-bold text-center mb-4">Starter Plan Register</h2>
+  <!-- 🚀 FORM -->
+  <div class="max-w-2xl mx-auto my-8 p-8 bg-white shadow-xl rounded-2xl card-hover">
+    <h2 class="text-3xl font-bold text-center mb-2 text-gray-900">
+      📝 ลงทะเบียนแพ็คเกจเริ่มต้น
+    </h2>
+    <p class="text-center text-gray-600 mb-8">กรอกข้อมูลของคุณเพื่อเริ่มใช้งาน</p>
     
-    <form id="starterForm">
-      <label class="block font-semibold mb-1">Ref. Code</label>
-      <input type="text" id="ref_code" class="w-full border px-3 py-2 rounded" required>
+    <form id="starterForm" class="space-y-6">
+      
+      <div>
+        <label class="emoji-label">
+          <span>🔑</span>
+          <span>Ref. Code</span>
+        </label>
+        <input type="text" id="ref_code" class="form-input w-full px-4 py-3 rounded-xl" placeholder="กรุณากรอก Ref. Code" required>
+      </div>
 
-      <label class="block font-semibold mt-4 mb-1">ชื่อ</label>
-      <input type="text" id="first_name" class="w-full border px-3 py-2 rounded" required>
+      <div>
+        <label class="emoji-label">
+          <span>👤</span>
+          <span>ชื่อ</span>
+        </label>
+        <input type="text" id="first_name" class="form-input w-full px-4 py-3 rounded-xl" placeholder="กรุณากรอกชื่อของคุณ" required>
+      </div>
 
-      <label class="block font-semibold mt-4 mb-1">นามสกุล</label>
-      <input type="text" id="last_name" class="w-full border px-3 py-2 rounded" required>
+      <div>
+        <label class="emoji-label">
+          <span>👨‍👩‍👧‍👦</span>
+          <span>นามสกุล</span>
+        </label>
+        <input type="text" id="last_name" class="form-input w-full px-4 py-3 rounded-xl" placeholder="กรุณากรอกนามสกุลของคุณ" required>
+      </div>
 
-      <label class="block font-semibold mt-4 mb-1">เลขบัตรประชาชน 13 หลัก</label>
-      <input type="text" id="national_id" maxlength="13" pattern="[0-9]{13}" class="w-full border px-3 py-2 rounded" required>
+      <div>
+        <label class="emoji-label">
+          <span>🆔</span>
+          <span>เลขบัตรประชาชน 13 หลัก</span>
+        </label>
+        <input type="text" id="national_id" maxlength="13" pattern="[0-9]{13}" class="form-input w-full px-4 py-3 rounded-xl" placeholder="กรุณากรอกเลขบัตรประชาชน 13 หลัก" required>
+      </div>
 
-      <label class="block font-semibold mt-4 mb-1">เบอร์โทรศัพท์</label>
-      <input type="tel" id="phone_number" maxlength="10" pattern="0[0-9]{8,9}" class="w-full border px-3 py-2 rounded" required>
+      <div>
+        <label class="emoji-label">
+          <span>📱</span>
+          <span>เบอร์โทรศัพท์</span>
+        </label>
+        <input type="tel" id="phone_number" maxlength="10" pattern="0[0-9]{8,9}" class="form-input w-full px-4 py-3 rounded-xl" placeholder="กรุณากรอกเบอร์โทรศัพท์" required>
+      </div>
 
-      <label class="block font-semibold mt-4 mb-1">จำนวนวัน</label>
-      <select id="duration" class="w-full border px-3 py-2 rounded" required>
-        <option value="">-- กรุณาเลือก --</option>
-      </select>
+      <div>
+        <label class="emoji-label">
+          <span>📅</span>
+          <span>จำนวนวัน</span>
+        </label>
+        <select id="duration" class="form-input w-full px-4 py-3 rounded-xl" required>
+          <option value="">🎯 กรุณาเลือกจำนวนวัน</option>
+        </select>
+      </div>
 
-      <div id="paymentSection" class="mt-6 hidden">
-        <p class="font-semibold mb-3">แสกน QR เพื่อชำระเงิน</p>
-        <img id="qrImage" src="" alt="QR Code" class="w-64 mx-auto rounded shadow mb-4">
+      <div id="paymentSection" class="mt-8 hidden">
+        <div class="text-center mb-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">
+            💳 ชำระเงิน
+          </h3>
+          <p class="text-gray-600">สแกน QR Code เพื่อชำระเงิน</p>
+        </div>
         
-        <label class="block font-semibold mb-1">แนบสลิป</label>
-        <input type="file" id="slipFile" accept="image/*" class="w-full border px-3 py-2 rounded" required>
-        <small class="text-gray-500">รองรับ JPG, PNG ไม่เกิน 10MB</small>
+        <div class="flex justify-center mb-6">
+          <div class="bg-white p-4 rounded-xl shadow-lg">
+            <img id="qrImage" src="" alt="QR Code" class="w-64 rounded-lg">
+          </div>
+        </div>
+        
+        <div>
+          <label class="emoji-label">
+            <span>🧾</span>
+            <span>แนบสลิปการโอนเงิน</span>
+          </label>
+          <input type="file" id="slipFile" accept="image/*" class="form-input w-full px-4 py-3 rounded-xl" required>
+          <small class="text-gray-500 mt-2 block">
+            📎 รองรับไฟล์ JPG, PNG ไม่เกิน 10MB
+          </small>
+        </div>
 
-        <button type="submit" id="submitBtn" class="w-full bg-blue-600 text-white font-bold py-3 mt-5 rounded hover:bg-blue-700">
-          ยืนยันการสั่งซื้อ
+        <button type="submit" id="submitBtn" class="gradient-button w-full text-white font-bold py-4 px-6 rounded-xl mt-6 flex items-center justify-center gap-2">
+          <span>✅</span>
+          <span>ยืนยันการสั่งซื้อ</span>
         </button>
       </div>
     </form>
 
-    <div id="messageContainer" class="mt-4 hidden">
-      <div id="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded hidden">
-        <strong>สำเร็จ!</strong> <span id="successText"></span>
+    <div id="messageContainer" class="mt-6">
+      <div id="successMessage" class="bg-green-50 border-2 border-green-200 text-green-800 px-6 py-4 rounded-xl hidden success-message">
+        <div class="flex items-center">
+          <span class="text-xl mr-3">🎉</span>
+          <div>
+            <strong>สำเร็จ!</strong>
+            <span id="successText"></span>
+          </div>
+        </div>
       </div>
-      <div id="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded hidden">
-        <strong>เกิดข้อผิดพลาด!</strong> <span id="errorText"></span>
+      <div id="errorMessage" class="bg-red-50 border-2 border-red-200 text-red-800 px-6 py-4 rounded-xl hidden error-message">
+        <div class="flex items-center">
+          <span class="text-xl mr-3">❌</span>
+          <div>
+            <strong>เกิดข้อผิดพลาด!</strong>
+            <span id="errorText"></span>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <!-- 🌟 FOOTER -->
+  <div class="max-w-2xl mx-auto mb-8 p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg">
+    <div class="text-center text-gray-700 space-y-2">
+      <p class="flex items-center justify-center gap-2">
+        <span>🔒</span>
+        <span>ข้อมูลของคุณได้รับการปกป้องด้วยระบบความปลอดภัยขั้นสูง</span>
+      </p>
+      <p class="flex items-center justify-center gap-2">
+        <span>📞</span>
+        <span>หากมีปัญหาการใช้งาน กรุณาติดต่อทีมงาน ADT</span>
+      </p>
+      <p class="flex items-center justify-center gap-2">
+        <span>⚡</span>
+        <span>เริ่มต้นใช้งานได้ทันทีหลังชำระเงิน</span>
+      </p>
     </div>
   </div>
 
@@ -76,10 +222,11 @@
     const errorText = document.getElementById("errorText");
     const messageContainer = document.getElementById("messageContainer");
 
+    // สร้างตัวเลือกจำนวนวัน พร้อมอีโมจิ
     for (let i = 1; i <= 15; i++) {
       const opt = document.createElement("option");
       opt.value = i;
-      opt.textContent = `${i} วัน`;
+      opt.textContent = `${i} วัน ⏰`;
       durationSelect.appendChild(opt);
     }
 
@@ -89,6 +236,8 @@
         const fileNumber = 142657 + val;
         qrImage.src = `https://wpxpukbvynxawfxcdroj.supabase.co/storage/v1/object/public/staterplanpayslip/${fileNumber}.jpg`;
         paymentSection.classList.remove("hidden");
+        // Smooth scroll to payment section
+        paymentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
         paymentSection.classList.add("hidden");
       }
@@ -98,18 +247,25 @@
       successText.textContent = msg;
       successMessage.classList.remove("hidden");
       errorMessage.classList.add("hidden");
-      messageContainer.classList.remove("hidden");
+      
+      // Auto hide after 5 seconds
+      setTimeout(() => {
+        successMessage.classList.add("hidden");
+      }, 5000);
     }
 
     function showError(msg) {
       errorText.textContent = msg;
       errorMessage.classList.remove("hidden");
       successMessage.classList.add("hidden");
-      messageContainer.classList.remove("hidden");
+      
+      // Auto hide after 8 seconds
+      setTimeout(() => {
+        errorMessage.classList.add("hidden");
+      }, 8000);
     }
 
     function hideMessages() {
-      messageContainer.classList.add("hidden");
       successMessage.classList.add("hidden");
       errorMessage.classList.add("hidden");
     }
@@ -130,7 +286,12 @@
       hideMessages();
 
       const slipFile = document.getElementById("slipFile").files[0];
-      if (!slipFile) return showError("กรุณาแนบสลิป");
+      if (!slipFile) return showError("กรุณาแนบสลิปการโอนเงิน");
+
+      const submitBtn = document.getElementById("submitBtn");
+      const originalHTML = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<span>⏳</span><span>กำลังประมวลผล...</span>';
+      submitBtn.disabled = true;
 
       try {
         const base64 = await fileToBase64(slipFile);
@@ -158,11 +319,12 @@
         }
 
         if (res.status === 200) {
-          // ✅ แสดงข้อความสำเร็จสั้นๆ
-          showSuccess("ส่งข้อมูลสำเร็จแล้ว!");
+          showSuccess("ส่งข้อมูลสำเร็จแล้ว! กำลังนำไปสู่หน้าถัดไป...");
           
-          // ✅ เปิดหน้า Thank You ทันที (ไม่มี delay)
-          window.location.href = "https://adtlive-workshop-02.onrender.com/staterplan-thankyou.html";
+          // เปิดหน้า Thank You ทันที
+          setTimeout(() => {
+            window.location.href = "https://adtlive-workshop-02.onrender.com/staterplan-thankyou.html";
+          }, 1500);
           
         } else {
           showError(result?.message || "เกิดข้อผิดพลาดจากระบบ");
@@ -171,7 +333,20 @@
       } catch (err) {
         console.error("❌ ERROR:", err);
         showError(err.message || "ไม่สามารถส่งข้อมูลได้");
+      } finally {
+        submitBtn.innerHTML = originalHTML;
+        submitBtn.disabled = false;
       }
+    });
+
+    // Auto-format เลขบัตรประชาชน
+    document.getElementById('national_id').addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '');
+    });
+
+    // Auto-format เบอร์โทรศัพท์
+    document.getElementById('phone_number').addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '');
     });
   </script>
 </body>
