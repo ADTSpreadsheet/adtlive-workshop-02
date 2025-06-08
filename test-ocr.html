@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Test OCR Slip</title>
+</head>
+<body>
+  <h2>🧾 ทดสอบระบบ OCR</h2>
+  <form id="ocrForm" enctype="multipart/form-data">
+    <label>Ref Code:</label><br>
+    <input type="text" name="ref_code" required><br><br>
+
+    <label>แนบสลิป:</label><br>
+    <input type="file" name="slip" accept="image/*" required><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const form = document.getElementById('ocrForm');
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const res = await fetch('/api/test-ocr', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+      document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+    };
+  </script>
+</body>
+</html>
